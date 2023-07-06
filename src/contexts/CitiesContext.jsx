@@ -6,8 +6,8 @@ import {
   useCallback,
 } from "react";
 
-const BASE_URL = "http://localhost:8000/cities";
-// const BASE_URL = 'http://localhost:8000/cities'
+const BASE_URL = "http://localhost:8000/";
+// const BASE_URL = 'http://localhost:8000/'
 
 const CitiesContext = createContext();
 
@@ -85,6 +85,7 @@ function CitiesProvider({ children }) {
     fetchCities();
   }, []);
 
+  // useCallback Allows getCity() to be used in a useEffect dependency array
   const getCity = useCallback(
     async function getCity(id) {
       if (Number(id) === currentCity.id) return;
