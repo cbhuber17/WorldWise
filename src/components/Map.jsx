@@ -34,6 +34,7 @@ function Map() {
     [mapLat, mapLng]
   );
 
+  // Sync map with geolocation (user clicks button to get their location)
   useEffect(
     function () {
       if (geolocationPosition)
@@ -44,12 +45,14 @@ function Map() {
 
   return (
     <div className={styles.mapContainer}>
+      {/* Get user's current position when clicking button */}
       {!geolocationPosition && (
         <Button type="position" onClick={getPosition}>
           {isLoadingPosition ? "Loading..." : "Use your position"}
         </Button>
       )}
 
+      {/* Leaflet library components */}
       <MapContainer
         center={mapPosition}
         zoom={6}
