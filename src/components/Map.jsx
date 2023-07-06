@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   MapContainer,
   TileLayer,
@@ -17,7 +17,7 @@ import Button from "./Button";
 
 function Map() {
   const { cities } = useCities();
-  const [mapPosition, setMapPosition] = useState([40, 0]);
+  const [mapPosition, setMapPosition] = useState([51, -114]); // Lat/lon
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
@@ -25,6 +25,8 @@ function Map() {
   } = useGeolocation();
   const [mapLat, mapLng] = useUrlPosition();
 
+  // Sync lat and lon states (react and URL) whenever one changes
+  // useEffect is a synchronization mechanism
   useEffect(
     function () {
       if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
@@ -77,14 +79,16 @@ function Map() {
 }
 
 function ChangeCenter({ position }) {
-  const map = useMap();
+  const map = useMap(); // Leaflet library hook
   map.setView(position);
   return null;
 }
 
+// Detect click on map to change lat/lon
 function DetectClick() {
   const navigate = useNavigate();
 
+  // React leaflet library custom hook
   useMapEvents({
     click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
   });
