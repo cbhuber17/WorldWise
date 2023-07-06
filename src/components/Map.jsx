@@ -81,6 +81,7 @@ function Map() {
   );
 }
 
+/* eslint react/prop-types: 0 */
 function ChangeCenter({ position }) {
   const map = useMap(); // Leaflet library hook
   map.setView(position);

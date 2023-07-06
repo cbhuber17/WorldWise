@@ -61,6 +61,7 @@ function reducer(state, action) {
   }
 }
 
+/* eslint react/prop-types: 0 */
 function CitiesProvider({ children }) {
   const [{ cities, isLoading, currentCity, error }, dispatch] = useReducer(
     reducer,

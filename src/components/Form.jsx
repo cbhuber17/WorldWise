@@ -112,6 +112,7 @@ function Form() {
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
 
+        {/* NPM package, shows calendar when selecting date box */}
         <DatePicker
           id="date"
           onChange={(date) => setDate(date)}
