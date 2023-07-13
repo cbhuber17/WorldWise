@@ -86,7 +86,9 @@ function CitiesProvider({ children }) {
     fetchCities();
   }, []);
 
-  // useCallback Allows getCity() to be used in a useEffect dependency array
+  // useCallback Allows getCity() to be used in a useEffect dependency array,
+  // without it being called constantly resulting in many re-renderings
+  // i.e. not have this function get re-created on each render, have it memoitized.
   const getCity = useCallback(
     async function getCity(id) {
       if (Number(id) === currentCity.id) return;
