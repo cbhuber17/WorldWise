@@ -20,7 +20,8 @@ export default function Product() {
           </p>
         </div>
         <img
-          src="/assets/img/img-2.jpg"
+          // src="/assets/img/img-2.jpg"
+          src="/WorldWise/assets/img/img-2.jpg"
           alt="overview of a large city with skyscrapers"
         />
       </section>
