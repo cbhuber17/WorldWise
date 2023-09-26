@@ -1,7 +1,14 @@
 .app {
-  height: 100vh;
-  padding: 2.4rem;
-  overscroll-behavior-y: none;
-  display: flex;
-  position: relative;
+  @media (min-width: 975px) {
+    height: 100vh;
+    padding: 2.4rem;
+    overscroll-behavior-y: none;
+    display: flex;
+    position: relative;
+  }
+  @media (max-width: 975px) {
+    height: 200vh;
+    width: 100%;
+    display: table;
+  }
 }

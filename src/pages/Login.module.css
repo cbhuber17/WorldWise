@@ -15,8 +15,18 @@
   gap: 2rem;
 
   /* Different from other form */
-  width: 48rem;
-  margin: 8rem auto;
+  @media (min-width: 650px) {
+    width: 48rem;
+    margin: 8rem auto;
+  }
+  @media (min-width: 480px) and (max-width: 650px) {
+    width: 35rem;
+    margin: 2rem auto;
+  }
+  @media (max-width: 480px) {
+    width: 25rem;
+    margin: 2rem auto;
+  }
 }
 
 .row {
