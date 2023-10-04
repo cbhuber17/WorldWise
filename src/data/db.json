@@ -1,0 +1,124 @@
+{
+  "cities": [
+    {
+      "cityName": "Madrid",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-16T20:30:32.000Z",
+      "notes": "First Trans-Atlantic city!  See trip photos at: https://photos.app.goo.gl/UhPfSatkTx3JFA6d7",
+      "position": {
+        "lat": 40.46635901755316,
+        "lng": -3.7133789062500004
+      },
+      "id": 1
+    },
+    {
+      "cityName": "Segovia",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-18T08:22:53.000Z",
+      "notes": "Amazing Aqueducts!!",
+      "position": {
+        "lat": 40.9429,
+        "lng": -4.1088
+      },
+      "id": 2
+    },
+    {
+      "cityName": "Burgos",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-18T13:03:32.000Z",
+      "notes": "Fantastic cathedral architecture.",
+      "position": {
+        "lat": 42.3505,
+        "lng": -3.6894
+      },
+      "id": 3
+    },
+    {
+      "cityName": "Bilbao",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-19T13:55:06.000Z",
+      "notes": "Really loved the Guggenheim museum!",
+      "position": {
+        "lat": 43.263,
+        "lng": -2.935
+      },
+      "id": 4
+    },
+    {
+      "cityName": "San Sebastian",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-20T17:50:26.000Z",
+      "notes": "Loved the food, the tapas, the beach!  Definitely in my top 3 places in the world!",
+      "position": {
+        "lat": 43.3183,
+        "lng": -1.9812
+      },
+      "id": 5
+    },
+    {
+      "cityName": "Pamplona",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-21T09:34:42.000Z",
+      "notes": "The source of the Running of the Bulls.",
+      "position": {
+        "lat": 42.8125,
+        "lng": -1.6458
+      },
+      "id": 6
+    },
+    {
+      "cityName": "Zaragoza",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-22T12:58:15.000Z",
+      "notes": "A giant courtyard next to Spanish architecture.",
+      "position": {
+        "lat": 41.6488,
+        "lng": -0.8891
+      },
+      "id": 7
+    },
+    {
+      "cityName": "Barcelona",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-22T18:38:21.000Z",
+      "notes": "Perfectly fluid Spanish culture.  Unforgettable flamenco shows!",
+      "position": {
+        "lat": 41.3874,
+        "lng": -2.1686
+      },
+      "id": 8
+    },
+    {
+      "cityName": "Ibiza",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-24T13:29:11.000Z",
+      "notes": "Party time at the clubs and on the catamaran!  Chill-out max at Cafe Del Mar :)",
+      "position": {
+        "lat": 39.02,
+        "lng": 1.4821
+      },
+      "id": 9
+    },
+    {
+      "cityName": "Valencia",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2004-07-28T11:56:47.000Z",
+      "notes": "Lovely Roman Architecture present, especially with the castles.",
+      "position": {
+        "lat": 39.4699,
+        "lng": -0.3763
+      },
+      "id": 10
+    }
+  ]
+}
