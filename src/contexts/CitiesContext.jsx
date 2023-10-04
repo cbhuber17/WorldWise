@@ -6,8 +6,8 @@ import {
   useCallback,
 } from "react";
 
-const BASE_URL = "http://localhost:8000";
-// const BASE_URL = 'http://localhost:8000'
+const BASE_URL = "https://my-json-server.typicode.com/cbhuber17/worldwise-db"; // prod
+// const BASE_URL = 'http://localhost:8000' // dev
 
 const CitiesContext = createContext();
 
