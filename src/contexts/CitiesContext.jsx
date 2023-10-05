@@ -5,8 +5,11 @@ import {
   useReducer,
   useCallback,
 } from "react";
+import PocketBase from "pocketbase";
 
-const BASE_URL = "https://my-json-server.typicode.com/cbhuber17/worldwise-db"; // prod
+const db = new PocketBase(import.meta.env.VITE_POCKETHOST_DB_URL);
+
+// const BASE_URL = "https://my-json-server.typicode.com/cbhuber17/worldwise-db"; // prod
 // const BASE_URL = 'http://localhost:8000' // dev
 
 const CitiesContext = createContext();
@@ -24,6 +27,7 @@ function reducer(state, action) {
       return { ...state, isLoading: true };
 
     case "cities/loaded":
+      console.log(action);
       return {
         ...state,
         isLoading: false,
@@ -73,10 +77,15 @@ function CitiesProvider({ children }) {
       dispatch({ type: "loading" });
 
       try {
-        const res = await fetch(`${BASE_URL}/cities`);
-        const data = await res.json();
+        // const res = await fetch(`${BASE_URL}/cities`);
+        console.log("request made");
+        const data = await db.collection("cities_cbhuber").getFullList({
+          sort: "-created",
+          requestKey: "getCities",
+        });
         dispatch({ type: "cities/loaded", payload: data });
-      } catch {
+      } catch (error) {
+        console.error(error);
         dispatch({
           type: "rejected",
           payload: "There was an error loading cities...",
@@ -96,10 +105,12 @@ function CitiesProvider({ children }) {
       dispatch({ type: "loading" });
 
       try {
-        const res = await fetch(`${BASE_URL}/cities/${id}`);
-        const data = await res.json();
+        // const res = await fetch(`${BASE_URL}/cities/${id}`);
+        const data = await db.collection("cities_cbhuber").getOne(id);
+        // const data = await res.json();
         dispatch({ type: "city/loaded", payload: data });
-      } catch {
+      } catch (error) {
+        console.error(error);
         dispatch({
           type: "rejected",
           payload: "There was an error loading the city...",
@@ -113,17 +124,22 @@ function CitiesProvider({ children }) {
     dispatch({ type: "loading" });
 
     try {
-      const res = await fetch(`${BASE_URL}/cities`, {
-        method: "POST",
-        body: JSON.stringify(newCity),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      // const res = await fetch(`${BASE_URL}/cities`, {
+      //   method: "POST",
+      //   body: JSON.stringify(newCity),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
+
+      const res = await db
+        .collection("cities_cbhuber")
+        .create(JSON.stringify(newCity));
       const data = await res.json();
 
       dispatch({ type: "city/created", payload: data });
-    } catch {
+    } catch (error) {
+      console.error(error);
       dispatch({
         type: "rejected",
         payload: "There was an error creating the city...",
@@ -135,12 +151,15 @@ function CitiesProvider({ children }) {
     dispatch({ type: "loading" });
 
     try {
-      await fetch(`${BASE_URL}/cities/${id}`, {
-        method: "DELETE",
-      });
+      // await fetch(`${BASE_URL}/cities/${id}`, {
+      //   method: "DELETE",
+      // });
+
+      await db.collection("cities_cbhuber").delete(id);
 
       dispatch({ type: "city/deleted", payload: id });
-    } catch {
+    } catch (error) {
+      console.error(error);
       dispatch({
         type: "rejected",
         payload: "There was an error deleting the city...",

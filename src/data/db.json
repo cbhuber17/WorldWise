@@ -10,7 +10,7 @@
         "lat": 40.46635901755316,
         "lng": -3.7133789062500004
       },
-      "id": 1
+      "id": 1001
     },
     {
       "cityName": "Segovia",
@@ -22,7 +22,7 @@
         "lat": 40.9429,
         "lng": -4.1088
       },
-      "id": 2
+      "id": 1002
     },
     {
       "cityName": "Burgos",
@@ -34,7 +34,7 @@
         "lat": 42.3505,
         "lng": -3.6894
       },
-      "id": 3
+      "id": 1003
     },
     {
       "cityName": "Bilbao",
@@ -46,7 +46,7 @@
         "lat": 43.263,
         "lng": -2.935
       },
-      "id": 4
+      "id": 1004
     },
     {
       "cityName": "San Sebastian",
@@ -58,7 +58,7 @@
         "lat": 43.3183,
         "lng": -1.9812
       },
-      "id": 5
+      "id": 1005
     },
     {
       "cityName": "Pamplona",
@@ -70,7 +70,7 @@
         "lat": 42.8125,
         "lng": -1.6458
       },
-      "id": 6
+      "id": 1006
     },
     {
       "cityName": "Zaragoza",
@@ -82,7 +82,7 @@
         "lat": 41.6488,
         "lng": -0.8891
       },
-      "id": 7
+      "id": 1007
     },
     {
       "cityName": "Barcelona",
@@ -94,7 +94,7 @@
         "lat": 41.3874,
         "lng": -2.1686
       },
-      "id": 8
+      "id": 1008
     },
     {
       "cityName": "Ibiza",
@@ -106,7 +106,7 @@
         "lat": 39.02,
         "lng": 1.4821
       },
-      "id": 9
+      "id": 1009
     },
     {
       "cityName": "Valencia",
@@ -118,7 +118,235 @@
         "lat": 39.4699,
         "lng": -0.3763
       },
-      "id": 10
+      "id": 1010
+    },
+    {
+      "cityName": "Bangkok",
+      "country": "Thailand",
+      "emoji": "🇹🇭",
+      "date": "2005-05-03T00:23:46.000Z",
+      "notes": "First trip to Thailand via tour group.  See pictures at: https://photos.app.goo.gl/pW5z6HSnHFvSorjY9",
+      "position": {
+        "lat": 13.7563,
+        "lng": 100.5018
+      },
+      "id": 1111
+    },
+    {
+      "cityName": "Khao Sok",
+      "country": "Thailand",
+      "emoji": "🇹🇭",
+      "date": "2005-05-07T09:48:35.000Z",
+      "notes": "Khao Sok national park.  A trip to the jungle with elephant ride!",
+      "position": {
+        "lat": 8.9777,
+        "lng": 98.6382
+      },
+      "id": 1112
+    },
+    {
+      "cityName": "Railay Highlands",
+      "country": "Thailand",
+      "emoji": "🇹🇭",
+      "date": "2005-05-11T10:41:12.000Z",
+      "notes": "Beautiful Railay Highlands, limestone rocks, beaches.",
+      "position": {
+        "lat": 8.0117,
+        "lng": 98.8378
+      },
+      "id": 1113
+    },
+    {
+      "cityName": "Koh Phangan",
+      "country": "Thailand",
+      "emoji": "🇹🇭",
+      "date": "2005-05-18T18:18:30.000Z",
+      "notes": "Party time (Full Moon Party) and massage course on the island!",
+      "position": {
+        "lat": 12.934,
+        "lng": 100.6732
+      },
+      "id": 1114
+    },
+    {
+      "cityName": "Koh Anh Thong",
+      "country": "Thailand",
+      "emoji": "🇹🇭",
+      "date": "2005-05-30T13:47:49.000Z",
+      "notes": "A complete relaxing island to our selves.  Kayaking!",
+      "position": {
+        "lat": 9.6227,
+        "lng": 99.675
+      },
+      "id": 1115
+    },
+    {
+      "cityName": "Koh Samui",
+      "country": "Thailand",
+      "emoji": "🇹🇭",
+      "date": "2005-06-02T00:24:46.000Z",
+      "notes": "One night stay in transit to Koh Tao!",
+      "position": {
+        "lat": 9.512,
+        "lng": 100.0136
+      },
+      "id": 1116
+    },
+    {
+      "cityName": "Koh Tao",
+      "country": "Thailand",
+      "emoji": "🇹🇭",
+      "date": "2005-06-03T13:28:17.000Z",
+      "notes": "Lovely island with fantastic snorkeling and scuba activities!",
+      "position": {
+        "lat": 10.0956,
+        "lng": 99.8404
+      },
+      "id": 1117
+    },
+    {
+      "cityName": "Tokyo",
+      "country": "Japan",
+      "emoji": "🇯🇵",
+      "date": "2007-04-06T05:09:48.000Z",
+      "notes": "First trip to Japan!  Tokyo is huge, you gotta check out their subway system!",
+      "position": {
+        "lat": 35.705,
+        "lng": 139.7675
+      },
+      "id": 1200
+    },
+    {
+      "cityName": "Nagoya",
+      "country": "Japan",
+      "emoji": "🇯🇵",
+      "date": "2007-04-09T11:53:25.000Z",
+      "notes": "Nagoya - Unfortunately not really exciting here in 2007.",
+      "position": {
+        "lat": 35.17,
+        "lng": 136.8927
+      },
+      "id": 1201
+    },
+    {
+      "cityName": "Osaka",
+      "country": "Japan",
+      "emoji": "🇯🇵",
+      "date": "2007-04-11T11:53:25.000Z",
+      "notes": "Osaka - Big white collar town.  Stayed at the lovely Hotel Kinki :)",
+      "position": {
+        "lat": 34.7042,
+        "lng": 135.5025
+      },
+      "id": 1202
+    },
+    {
+      "cityName": "Nara",
+      "country": "Japan",
+      "emoji": "🇯🇵",
+      "date": "2007-04-14T16:17:03.000Z",
+      "notes": "Fantastic trip to Nara, stayed at a traditional Ryoken.",
+      "position": {
+        "lat": 34.675,
+        "lng": 135.829
+      },
+      "id": 1203
+    },
+    {
+      "cityName": "Hiroshima",
+      "country": "Japan",
+      "emoji": "🇯🇵",
+      "date": "2007-04-19T11:52:58.000Z",
+      "notes": "So much history in this beautiful city of Hiroshima.",
+      "position": {
+        "lat": 34.395,
+        "lng": 132.4478
+      },
+      "id": 1204
+    },
+    {
+      "cityName": "Havana",
+      "country": "Cuba",
+      "emoji": "🇨🇺",
+      "date": "2008-09-26T13:39:31.000Z",
+      "notes": "Latin culture, rum and history in Cuba!  Pics here: https://photos.app.goo.gl/dg9AXTReeoxd38zh9",
+      "position": {
+        "lat": 23.1136,
+        "lng": -82.3666
+      },
+      "id": 1300
+    },
+    {
+      "cityName": "Baracoa",
+      "country": "Cuba",
+      "emoji": "🇨🇺",
+      "date": "2008-09-28T15:27:34.000Z",
+      "notes": "Baracoa is located on the spot where Christopher Columbus landed in Cuba on his first voyage.",
+      "position": {
+        "lat": 20.3475,
+        "lng": -74.5024
+      },
+      "id": 1301
+    },
+    {
+      "cityName": "Santiago de Cuba",
+      "country": "Cuba",
+      "emoji": "🇨🇺",
+      "date": "2008-10-01T06:03:30.000Z",
+      "notes": "Known for colonial architecture and revolutionary history.",
+      "position": {
+        "lat": 20.0169,
+        "lng": -75.8302
+      },
+      "id": 1302
+    },
+    {
+      "cityName": "Camaguey",
+      "country": "Cuba",
+      "emoji": "🇨🇺",
+      "date": "2008-10-04T20:00:00.000Z",
+      "notes": "The old city layout resembles a real maze, with narrow, short streets always turning in one direction or another.",
+      "position": {
+        "lat": 21.3926,
+        "lng": -77.9053
+      },
+      "id": 1303
+    },
+    {
+      "cityName": "Trinidad",
+      "country": "Cuba",
+      "emoji": "🇨🇺",
+      "date": "2008-10-06T11:08:20.000Z",
+      "notes": "Cobblestone streets!",
+      "position": {
+        "lat": 21.796,
+        "lng": -79.9808
+      },
+      "id": 1304
+    },
+    {
+      "cityName": "Santa Clara",
+      "country": "Cuba",
+      "emoji": "🇨🇺",
+      "date": "2008-10-10T07:18:49.000Z",
+      "notes": "Cobblestone streets!",
+      "position": {
+        "lat": 22.4244,
+        "lng": -79.9417
+      },
+      "id": 1305
+    },
+    {
+      "cityName": "San Diego, California",
+      "country": "United States of America",
+      "emoji": "🇺🇸",
+      "date": "2009-06-03T12:42:43.000Z",
+      "notes": "Visit Mr. Broadbent in SD!  See photos at: https://photos.app.goo.gl/RaxiDrBAKBvCu2xVA",
+      "position": {
+        "lat": 32.7157,
+        "lng": -117.1611
+      },
+      "id": 1400
     }
   ]
 }

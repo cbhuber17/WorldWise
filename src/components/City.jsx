@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Markup } from "interweave";
 import { useParams } from "react-router-dom";
 import { useCities } from "../contexts/CitiesContext";
 import BackButton from "./BackButton";
@@ -45,7 +46,7 @@ function City() {
       {notes && (
         <div className={styles.row}>
           <h6>Your notes</h6>
-          <p>{notes}</p>
+          <Markup content={notes} />
         </div>
       )}
 
