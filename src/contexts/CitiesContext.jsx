@@ -8,9 +8,7 @@ import {
 import PocketBase from "pocketbase";
 
 const db = new PocketBase(import.meta.env.VITE_POCKETHOST_DB_URL);
-
-// const BASE_URL = "https://my-json-server.typicode.com/cbhuber17/worldwise-db"; // prod
-// const BASE_URL = 'http://localhost:8000' // dev
+const db_collection = "cities_cbhuber";
 
 const CitiesContext = createContext();
 
@@ -77,9 +75,8 @@ function CitiesProvider({ children }) {
       dispatch({ type: "loading" });
 
       try {
-        // const res = await fetch(`${BASE_URL}/cities`);
         console.log("request made");
-        const data = await db.collection("cities_cbhuber").getFullList({
+        const data = await db.collection(db_collection).getFullList({
           sort: "-created",
           requestKey: "getCities",
         });
@@ -105,9 +102,7 @@ function CitiesProvider({ children }) {
       dispatch({ type: "loading" });
 
       try {
-        // const res = await fetch(`${BASE_URL}/cities/${id}`);
-        const data = await db.collection("cities_cbhuber").getOne(id);
-        // const data = await res.json();
+        const data = await db.collection(db_collection).getOne(id);
         dispatch({ type: "city/loaded", payload: data });
       } catch (error) {
         console.error(error);
@@ -124,16 +119,8 @@ function CitiesProvider({ children }) {
     dispatch({ type: "loading" });
 
     try {
-      // const res = await fetch(`${BASE_URL}/cities`, {
-      //   method: "POST",
-      //   body: JSON.stringify(newCity),
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-
       const res = await db
-        .collection("cities_cbhuber")
+        .collection(db_collection)
         .create(JSON.stringify(newCity));
       const data = await res.json();
 
@@ -151,11 +138,7 @@ function CitiesProvider({ children }) {
     dispatch({ type: "loading" });
 
     try {
-      // await fetch(`${BASE_URL}/cities/${id}`, {
-      //   method: "DELETE",
-      // });
-
-      await db.collection("cities_cbhuber").delete(id);
+      await db.collection(db_collection).delete(id);
 
       dispatch({ type: "city/deleted", payload: id });
     } catch (error) {
