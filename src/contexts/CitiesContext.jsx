@@ -25,7 +25,6 @@ function reducer(state, action) {
       return { ...state, isLoading: true };
 
     case "cities/loaded":
-      console.log(action);
       return {
         ...state,
         isLoading: false,
@@ -75,7 +74,6 @@ function CitiesProvider({ children }) {
       dispatch({ type: "loading" });
 
       try {
-        console.log("request made");
         const data = await db.collection(db_collection).getFullList({
           sort: "-created",
           requestKey: "getCities",
@@ -119,10 +117,9 @@ function CitiesProvider({ children }) {
     dispatch({ type: "loading" });
 
     try {
-      const res = await db
+      const data = await db
         .collection(db_collection)
         .create(JSON.stringify(newCity));
-      const data = await res.json();
 
       dispatch({ type: "city/created", payload: data });
     } catch (error) {
