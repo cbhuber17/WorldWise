@@ -134,15 +134,15 @@ function Form() {
           config={{
             toolbar: {
               items: [
-                "undo",
-                "redo",
-                "|",
-                "heading",
-                "|",
+                // "undo",
+                // "redo",
+                // "|",
+                // "heading",
+                // "|",
                 // "fontfamily",
-                "fontsize",
-                "fontColor",
-                "fontBackgroundColor",
+                // "fontsize",
+                // "fontColor",
+                // "fontBackgroundColor",
                 "|",
                 "bold",
                 "italic",
@@ -155,9 +155,9 @@ function Form() {
                 // "uploadImage",
                 // "blockQuote",
                 // "codeBlock",
-                "|",
-                "bulletedList",
-                "numberedList",
+                // "|",
+                // "bulletedList",
+                // "numberedList",
                 // "todoList",
                 // "outdent",
                 // "indent",
@@ -169,7 +169,6 @@ function Form() {
           onChange={(event, editor) => {
             const data = editor.getData();
             setNotes(data);
-            console.log({ event, editor, data });
           }}
         />
 
