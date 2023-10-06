@@ -12,6 +12,9 @@ import Spinner from "./Spinner";
 import { useCities } from "../contexts/CitiesContext";
 import { useNavigate } from "react-router-dom";
 
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
     .toUpperCase()
@@ -125,11 +128,56 @@ function Form() {
 
       <div className={styles.row}>
         <label htmlFor="notes">Notes about your trip to {cityName}</label>
-        <textarea
+        <CKEditor
+          id="notes"
+          editor={ClassicEditor}
+          config={{
+            toolbar: {
+              items: [
+                "undo",
+                "redo",
+                "|",
+                "heading",
+                "|",
+                // "fontfamily",
+                "fontsize",
+                "fontColor",
+                "fontBackgroundColor",
+                "|",
+                "bold",
+                "italic",
+                // "strikethrough",
+                // "subscript",
+                // "superscript",
+                // "code",
+                "|",
+                "link",
+                // "uploadImage",
+                // "blockQuote",
+                // "codeBlock",
+                "|",
+                "bulletedList",
+                "numberedList",
+                // "todoList",
+                // "outdent",
+                // "indent",
+              ],
+              shouldNotGroupWhenFull: false,
+            },
+          }}
+          data={notes}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setNotes(data);
+            console.log({ event, editor, data });
+          }}
+        />
+
+        {/* <textarea
           id="notes"
           onChange={(e) => setNotes(e.target.value)}
           value={notes}
-        />
+        /> */}
       </div>
 
       <div className={styles.buttons}>
