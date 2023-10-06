@@ -75,7 +75,7 @@ function CitiesProvider({ children }) {
 
       try {
         const data = await db.collection(db_collection).getFullList({
-          sort: "-created",
+          sort: "-date",
           requestKey: "getCities",
         });
         dispatch({ type: "cities/loaded", payload: data });
