@@ -76,15 +76,12 @@ function Form() {
 
     if (!cityName || !date) return;
 
-    // For rich text formatting of notes
-    const hmtlNote = `<p>${notes}</p>`;
-
     const newCity = {
       cityName,
       country,
       emoji,
       date,
-      notes: hmtlNote,
+      notes,
       position: { lat, lng },
     };
 
