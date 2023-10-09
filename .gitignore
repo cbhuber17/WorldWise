@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+src/data/db.json
+utils/cities_cbhuber_db.csv
