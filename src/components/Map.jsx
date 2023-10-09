@@ -1,3 +1,4 @@
+// import { useNavigate, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
   MapContainer,
@@ -64,14 +65,23 @@ function Map() {
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
         {cities.map((city) => (
+          // <Link
+          //   to={`cities/${city.id}?lat=${city.position.lat}&lng=${city.position.lng}`}
+          //   key={city.id}
+          // >
           <Marker
             position={[city.position.lat, city.position.lng]}
             key={city.id}
+            eventHandlers={{
+              click: () =>
+                (window.location = `#/app/cities/${city.id}?lat=${city.position.lat}&lng=${city.position.lng}`),
+            }}
           >
             <Popup>
               <span>{city.emoji}</span> <span>{city.cityName}</span>
             </Popup>
           </Marker>
+          // </Link>
         ))}
 
         <ChangeCenter position={mapPosition} />
