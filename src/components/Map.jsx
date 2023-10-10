@@ -57,8 +57,9 @@ function Map() {
       <MapContainer
         center={mapPosition}
         zoom={6}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         className={styles.map}
+        zoomControl={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

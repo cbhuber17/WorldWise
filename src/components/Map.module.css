@@ -1,11 +1,24 @@
 .mapContainer {
   flex: 1;
-  height: 100%;
+  @media (min-width: 975px) {
+    height: 100%;
+  }
+  @media (max-width: 975px) {
+    height: 75vh;
+  }
+
+  /* height: 100%; */
   background-color: var(--color-dark--2);
   position: relative;
 }
 
 .map {
+  /* @media (min-width: 975px) {
+    height: 100%;
+  }
+  @media (max-width: 975px) {
+    height: 50vh;
+  } */
   height: 100%;
 }
 
