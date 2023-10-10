@@ -44,6 +44,10 @@ function Map() {
     [geolocationPosition]
   );
 
+  let scrollWheelZoom = true;
+
+  if (window.innerWidth < 975) scrollWheelZoom = false;
+
   return (
     <div className={styles.mapContainer}>
       {/* Get user's current position when clicking button */}
@@ -57,9 +61,9 @@ function Map() {
       <MapContainer
         center={mapPosition}
         zoom={6}
-        scrollWheelZoom={false}
+        scrollWheelZoom={scrollWheelZoom}
         className={styles.map}
-        zoomControl={true}
+        zoomControl={!scrollWheelZoom}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
