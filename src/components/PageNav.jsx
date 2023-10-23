@@ -1,11 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Logo from "./Logo";
+import Title from "./Title";
 import styles from "./PageNav.module.css";
 
 function PageNav() {
   return (
     <nav className={styles.nav}>
-      <Logo />
+      <Link to="/" style={{ display: "flex" }}>
+        <Logo />
+        <Title />
+      </Link>
 
       <ul>
         <li>
