@@ -14,7 +14,7 @@
 .product section {
   @media (min-width: 950px) {
     width: clamp(80rem, 80%, 90rem);
-    margin: 6rem auto;
+    margin: 3rem auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 7rem;
