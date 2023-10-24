@@ -16,7 +16,7 @@ import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import Button from "./Button";
 
-function Map() {
+function Map({ markersRef }) {
   const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([51, -114]); // Lat/lon
   const {
@@ -77,6 +77,7 @@ function Map() {
           <Marker
             position={[city.position.lat, city.position.lng]}
             key={city.id}
+            ref={(ref) => (markersRef.current[city.id] = ref)}
             eventHandlers={{
               click: () =>
                 (window.location = `#/app/cities/${city.id}?lat=${city.position.lat}&lng=${city.position.lng}`),

@@ -4,7 +4,8 @@ import Logo from "./Logo";
 import Title from "./Title";
 import styles from "./Sidebar.module.css";
 
-function Sidebar() {
+/* eslint react/prop-types: 0 */
+function Sidebar({ markersRef }) {
   return (
     <div className={styles.sidebar}>
       <Link
@@ -15,7 +16,8 @@ function Sidebar() {
         <Title />
       </Link>
       <AppNav />
-      <Outlet /> {/* Similar to children prop of the router */}
+      <Outlet context={markersRef} />
+      {/* Similar to children prop of the router */}
       <footer className={styles.footer}>
         <p className={styles.copyright}>
           &copy; Copyright {new Date().getFullYear()} by GeoNotes Inc.

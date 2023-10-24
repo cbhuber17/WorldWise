@@ -55,6 +55,7 @@ function App() {
                 }
               >
                 {/* INDEX is the default child route */}
+                {/* React-Router-Dom <Outlet /> from SideBar is rendered below */}
                 <Route index replace element={<Navigate to="cities" />} />
                 <Route path="cities" element={<CityList />} />
                 <Route path="cities/:id" element={<City />} />

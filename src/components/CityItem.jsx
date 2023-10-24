@@ -10,7 +10,7 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 /* eslint react/prop-types: 0 */
-function CityItem({ city }) {
+function CityItem({ city, markersRef }) {
   // const { currentCity, deleteCity } = useCities();
   const { currentCity } = useCities();
   const { cityName, emoji, date, id, position } = city;
@@ -22,8 +22,12 @@ function CityItem({ city }) {
     // deleteCity(id);
   }
 
+  function handleListItem(markersRef, id) {
+    markersRef.current[id].openPopup();
+  }
+
   return (
-    <li>
+    <li onClick={() => handleListItem(markersRef, id)}>
       <Link
         className={`${styles.cityItem} ${
           id === currentCity.id ? styles["cityItem--active"] : ""
