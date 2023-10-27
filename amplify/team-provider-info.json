@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-geonotes-dev-152221-authRole",
+      "UnauthRoleArn": "arn:aws:iam::630372904178:role/amplify-geonotes-dev-152221-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::630372904178:role/amplify-geonotes-dev-152221-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-geonotes-dev-152221-deployment",
+      "UnauthRoleName": "amplify-geonotes-dev-152221-unauthRole",
+      "StackName": "amplify-geonotes-dev-152221",
+      "StackId": "arn:aws:cloudformation:us-west-2:630372904178:stack/amplify-geonotes-dev-152221/a9bc9180-72a2-11ee-87d1-0651cea7a4b3",
+      "AmplifyAppId": "d12xvdp6qhghdo"
+    },
+    "categories": {
+      "auth": {
+        "GeoNotes": {}
+      }
+    }
+  }
+}

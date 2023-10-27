@@ -6,7 +6,15 @@ import eslint from "vite-plugin-eslint";
 export default defineConfig({
   base: "/WorldWise/",
   plugins: [react(), eslint()],
+  define: {
+    global: {},
+  },
   optimizeDeps: {
     include: ["interweave"],
+  },
+  resolve: {
+    alias: {
+      "./runtimeConfig": "./runtimeConfig.browser",
+    },
   },
 });
