@@ -4,7 +4,14 @@
 - Create sign up page
 - Allow to view other people's travels read-only
 - Create/update profile page
-- When clicking on a city in the left panel, open the popup about it, see attempt in folder tempPopupClickList - May need to create ref in AppLayout and use forwardRef to capture in Map and pass to Sidebar
+- Center map on popup when clicking a CityItem, perhaps useRef for map and pass it to CityItem
 - MAIN.JSX add strict mode for production
 - Hyperlink products page
 - Fill out this readme info
+- Check responsiveness
+- Reactivate delete city when added login for each account.
+- "Use your position" with a popup active didn't move to position
+- SignUp post-confirm email, "Welcome to GeoNotes!". Will need email backend.
+- SignUp image/avatar remove for sign up, if so add "accept" field for images only
+- Confirm page send code email again
+- Check DBs, only whitelist "allowed users", e.g. friends and family.
