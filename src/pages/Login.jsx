@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Button from "../components/Button";
 import PageNav from "../components/PageNav";
+import FormRow from "../components/FormRow";
 import styles from "./Login.module.css";
 import { useAuth } from "../contexts/FakeAuthContext";
 
@@ -27,29 +28,34 @@ export default function Login() {
     [isAuthenticated, navigate]
   );
 
+  const formRows = [
+    {
+      htmlFor: "email",
+      text: "Email Address",
+      type: "email",
+      id: "email",
+      handleFn: setEmail,
+      value: email,
+    },
+    {
+      htmlFor: "password",
+      text: "Password",
+      type: "password",
+      id: "password",
+      handleFn: setPassword,
+      value: password,
+    },
+  ];
+
   return (
     <main className={styles.login}>
       <PageNav />
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.row}>
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            id="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </div>
+      <h1>Login</h1>
 
-        <div className={styles.row}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-        </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        {formRows.map((formRow) => (
+          <FormRow key={formRow.id} {...formRow} />
+        ))}
 
         <div>
           <Button type="primary">Sign in</Button>
