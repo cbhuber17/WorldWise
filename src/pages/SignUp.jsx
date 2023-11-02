@@ -7,6 +7,7 @@ import FormRow from "../components/FormRow";
 import Button from "../components/Button";
 import styles from "./Login.module.css";
 import { sleep } from "../utils/utils";
+import parse from "html-react-parser";
 
 const toastStyle = { fontSize: "20px" };
 
@@ -148,8 +149,9 @@ export default function SignUp() {
     },
     {
       htmlFor: "password",
-      // TODO: Make note muted text
-      text: "Password (min 8 characters, containing at least: 1 uppercase, 1 lowercase, 1 numeric)",
+      text: parse(
+        "Password <br/><span style='font-size:11px; color:silver'>Min 8 characters, containing at least: 1 uppercase, 1 lowercase, 1 numeric</span>"
+      ),
       type: "password",
       id: "password",
       handleFn: setPassword,
