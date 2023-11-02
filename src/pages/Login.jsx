@@ -4,7 +4,6 @@ import Button from "../components/Button";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
 import styles from "./Login.module.css";
-// import { useAuth } from "../contexts/FakeAuthContext";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Login() {
