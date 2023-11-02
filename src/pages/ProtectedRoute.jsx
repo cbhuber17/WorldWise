@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/FakeAuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 /* eslint react/prop-types: 0 */
 function ProtectedRoute({ children }) {

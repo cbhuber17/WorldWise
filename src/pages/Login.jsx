@@ -4,12 +4,15 @@ import Button from "../components/Button";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
 import styles from "./Login.module.css";
-import { useAuth } from "../contexts/FakeAuthContext";
+// import { useAuth } from "../contexts/FakeAuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
-  const [email, setEmail] = useState("jack@example.com");
-  const [password, setPassword] = useState("qwerty");
+  // const [email, setEmail] = useState("jack@example.com");
+  // const [password, setPassword] = useState("qwerty");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();

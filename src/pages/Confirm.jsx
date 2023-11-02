@@ -6,6 +6,7 @@ import FormRow from "../components/FormRow";
 import PageNav from "../components/PageNav";
 import Button from "../components/Button";
 import styles from "./Login.module.css";
+import { sleep } from "../utils/utils";
 
 /* eslint react/prop-types: 0 */
 export default function Confirm() {
@@ -28,12 +29,17 @@ export default function Confirm() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await Auth.confirmSignUp(email, code);
-      toast.success("Confirmation successful!");
+      const confirm = await Auth.confirmSignUp(email, code);
+      console.log(confirm);
+      toast.success("Confirmation successful!", {
+        style: { fontSize: "20px" },
+      });
+      await sleep(2500);
       navigate("/login");
     } catch (error) {
       toast.error(error, { style: { fontSize: "20px" } });
       console.log("Error confirming sign up", error);
+      await sleep(2500);
     }
     setCode("");
   }

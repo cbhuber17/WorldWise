@@ -6,6 +6,7 @@ import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
 import Button from "../components/Button";
 import styles from "./Login.module.css";
+import { sleep } from "../utils/utils";
 
 const toastStyle = { fontSize: "20px" };
 
@@ -75,6 +76,17 @@ export default function SignUp() {
 
     // TODO: Check if allowed in list of DBs, i.e. whitelisted friends and family
 
+    // TODO: Try this
+    // Auth.signIn(user.Username, user.Password)
+    // .then((res) => {
+    //     AsyncStorage.setItem('token', JSON.stringify(user))
+    //     .then(res =>{
+    //         console.log('saved')
+    //     })
+    //     .catch(err=>{
+    //         console.log(err)
+    //     })
+
     try {
       await Auth.signUp({
         username: email,
@@ -91,13 +103,21 @@ export default function SignUp() {
         },
       });
 
+      // TODO: button state change when submitting
+
+      toast.success("Successfully signed up!", { style: toastStyle });
+      await sleep(2500);
+
       navigate("/confirm", { state: { email } });
     } catch (error) {
-      // TODO: Check previously signed up, happens in this catch
+      // TODO: Check previously signed up, happens in this catch as certain exception type
+      // TODO: Check password requirements:
+      // InvalidPasswordException: Password did not conform with policy: Password not long enough
       setPassword("");
       setPasswordConfirm("");
       toast.error(error);
-      console.error("Error signing up:", error);
+      console.log("Error signing up:", error);
+      await sleep(2500);
     }
   }
 
@@ -128,7 +148,8 @@ export default function SignUp() {
     },
     {
       htmlFor: "password",
-      text: "Password",
+      // TODO: Make note muted text
+      text: "Password (min 8 characters, containing at least: 1 uppercase, 1 lowercase, 1 numeric)",
       type: "password",
       id: "password",
       handleFn: setPassword,

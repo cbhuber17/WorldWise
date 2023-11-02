@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import { CitiesProvider } from "./contexts/CitiesContext";
-import { AuthProvider } from "./contexts/FakeAuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
 // Components for lazy loading
