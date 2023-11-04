@@ -11,15 +11,14 @@ const formatDate = (date) =>
 
 /* eslint react/prop-types: 0 */
 function CityItem({ city, markersRef }) {
-  // const { currentCity, deleteCity } = useCities();
-  const { currentCity } = useCities();
+  const { currentCity, deleteCity } = useCities();
   const { cityName, emoji, date, id, position } = city;
 
   function handleClick(e) {
     e.preventDefault();
 
-    // TODO: Disable in production
-    // deleteCity(id);
+    // TODO: Disable when viewing read-only
+    deleteCity(id);
   }
 
   function handleListItem(markersRef, id) {

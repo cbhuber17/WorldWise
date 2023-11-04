@@ -22,6 +22,8 @@ export default function Login() {
     if (email && password) login(email, password);
   }
 
+  // TODO: button state change when submitting
+
   // After user is authenticated, move to app
   useEffect(
     function () {

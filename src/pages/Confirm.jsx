@@ -31,6 +31,7 @@ export default function Confirm() {
     try {
       const confirm = await Auth.confirmSignUp(email, code);
       console.log(confirm);
+      // TODO: button state change when submitting
       toast.success("Confirmation successful!", {
         style: { fontSize: "20px" },
       });
