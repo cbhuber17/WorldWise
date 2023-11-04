@@ -13,3 +13,4 @@
 - Confirm page send code email again
 - Check DBs, only whitelist "allowed users", e.g. friends and family.
 - Address TODOs in code
+- Key=index should not be used, need a better static unique id
