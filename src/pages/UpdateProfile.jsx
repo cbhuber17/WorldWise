@@ -81,6 +81,7 @@ export default function UpdateProfile() {
     // TODO: Check if allowed in list of DBs, i.e. whitelisted friends and family
 
     try {
+      // TODO: Check for blank entries
       await Auth.updateUserAttributes(user, {
         name: firstName,
         family_name: lastName,
@@ -140,7 +141,7 @@ export default function UpdateProfile() {
     {
       htmlFor: "password",
       text: parse(
-        "Password <br/><span style='font-size:11px; color:silver'>Min 8 characters, containing at least: 1 uppercase, 1 lowercase, 1 numeric</span>"
+        "Update Password <br/><span style='font-size:11px; color:silver'>Min 8 characters, containing at least: 1 uppercase, 1 lowercase, 1 numeric</span>"
       ),
       type: "password",
       id: "password",
