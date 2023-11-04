@@ -41,6 +41,7 @@ const Confirm = lazy(() => import("./pages/Confirm"));
 const Login = lazy(() => import("./pages/Login"));
 const AppLayout = lazy(() => import("./pages/AppLayout"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const UpdateProfile = lazy(() => import("./pages/UpdateProfile"));
 
 // function App({ signOut, user }) {
 function App() {
@@ -57,6 +58,7 @@ function App() {
               <Route path="signup" element={<SignUp />} />
               <Route path="confirm" element={<Confirm />} />
               <Route path="login" element={<Login />} />
+              <Route path="update-profile" element={<UpdateProfile />} />
               <Route
                 path="app"
                 element={

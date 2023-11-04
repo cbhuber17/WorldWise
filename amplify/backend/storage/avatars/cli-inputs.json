@@ -1,0 +1,14 @@
+{
+  "resourceName": "avatars",
+  "policyUUID": "530185b0",
+  "bucketName": "geonotes837a0f77fbd54db991dce9c9f52f2be7",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger5ebb0092",
+  "groupAccess": {}
+}

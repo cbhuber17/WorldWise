@@ -1,22 +1,17 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Auth } from "aws-amplify";
-import toast, { Toaster } from "react-hot-toast";
-import { sleep } from "../utils/utils";
+import { useState, useEffect } from "react";
+import styles from "./Login.module.css";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
 import Button from "../components/Button";
-import styles from "./Login.module.css";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 import parse from "html-react-parser";
-
-// import { Storage } from "aws-amplify";
+import { sleep } from "../utils/utils";
+import { Auth } from "aws-amplify";
+import { Link } from "react-router-dom";
 
 const toastStyle = { fontSize: "20px" };
-
-function validateEmail(email) {
-  var re = /\S+@\S+\.\S+/;
-  return re.test(email);
-}
 
 function checkField(field, errorMsg) {
   if (!field) {
@@ -26,15 +21,9 @@ function checkField(field, errorMsg) {
   return true;
 }
 
-function validateEmailPassword(email, password, passwordConfirm) {
-  if (!checkField(email, "Email")) return false;
+function validatePassword(password, passwordConfirm) {
   if (!checkField(password, "Password")) return false;
   if (!checkField(passwordConfirm, "Password confirmation")) return false;
-
-  if (!validateEmail(email)) {
-    toast.error("Invalid email.", { style: toastStyle });
-    return false;
-  }
 
   if (password !== passwordConfirm) {
     toast.error("Passwords to not match", { style: toastStyle });
@@ -50,20 +39,31 @@ function validateName(firstName, lastName) {
 
   return true;
 }
+const user = await Auth.currentAuthenticatedUser();
 
-/* eslint react/prop-types: 0 */
-export default function SignUp() {
-  const [email, setEmail] = useState("");
+export default function UpdateProfile() {
+  const navigate = useNavigate();
+  const { attributes } = user;
+
+  // TODO: use AWS as auth provider?  Applies to elsewhere in the code lib.
+  const { isAuthenticated } = useAuth();
+
+  // Not authenticated, just put back to home page
+  useEffect(
+    function () {
+      if (!isAuthenticated) navigate("/");
+    },
+    [isAuthenticated, navigate]
+  );
+
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState(`${attributes.name}`);
+  const [lastName, setLastName] = useState(`${attributes.family_name}`);
   // const [avatar, setAvatar] = useState("");
-  const navigate = useNavigate();
 
   async function handleSubmit(
     e,
-    email,
     firstName,
     lastName,
     password,
@@ -75,26 +75,22 @@ export default function SignUp() {
     e.preventDefault();
 
     // Guard clauses
-    if (!validateEmailPassword(email, password, passwordConfirm)) return;
+    if (!validatePassword(password, passwordConfirm)) return;
     if (!validateName(firstName, lastName)) return;
 
     // TODO: Check if allowed in list of DBs, i.e. whitelisted friends and family
 
     try {
-      await Auth.signUp({
-        username: email,
+      await Auth.updateUserAttributes(user, {
+        name: firstName,
+        family_name: lastName,
         password,
-        attributes: {
-          email,
-          name: firstName,
-          family_name: lastName,
-          // TODO: remove blank
-          picture: "",
-        },
+        // TODO: remove blank
+        picture: "",
       });
 
       // TODO: button state change when submitting
-      // const upload = await Storage.put(avatar.name, avatar, {
+      // const update = await Storage.put(avatar.name, avatar, {
       //   level: "private",
       //   contentType: "image/*",
       //   completeCallback: (event) => {
@@ -105,12 +101,12 @@ export default function SignUp() {
       //   },
       // });
 
-      // console.log(upload);
+      // console.log(update);
 
-      toast.success("Successfully signed up!", { style: toastStyle });
+      toast.success("Successfully updated profile!", { style: toastStyle });
       await sleep(2500);
 
-      navigate("/confirm", { state: { email } });
+      navigate("/app/cities");
     } catch (error) {
       // TODO: Check previously signed up, happens in this catch as certain exception type UsernameExistsException:
       // TODO: Check password requirements:
@@ -124,20 +120,7 @@ export default function SignUp() {
     }
   }
 
-  // async function handleFile(e) {
-  //   console.log(e.target.files[0]);
-  //   setAvatar(e.target.files[0]);
-  // }
-
   const formRows = [
-    {
-      htmlFor: "email",
-      text: "Email Address",
-      type: "email",
-      id: "email",
-      handleFn: setEmail,
-      value: email,
-    },
     {
       htmlFor: "first",
       text: "First Name",
@@ -178,13 +161,12 @@ export default function SignUp() {
     // Change style
     <main className={styles.login}>
       <PageNav />
-      <h1>Sign up for GeoNotes!</h1>
+      <h1>{`Update your profile for: ${attributes.email}`}</h1>
       <form
         className={styles.form}
         onSubmit={(e) =>
           handleSubmit(
             e,
-            email,
             firstName,
             lastName,
             password,
@@ -201,38 +183,29 @@ export default function SignUp() {
 
         {/* Avatar form row input */}
         {/* <div className={styles.row}>
-          <label htmlFor="avatar">
-            Avatar <br />
-            <span style={{ fontSize: "11px", color: "silver" }}>Optional</span>
-          </label>
-          <input
-            style={{ color: "black" }}
-            type="file"
-            id="avatar"
-            accept="image"
-            required={false}
-            onChange={(e) => handleFile(e)}
-          />
-        </div> */}
+    <label htmlFor="avatar">
+      Avatar <br />
+      <span style={{ fontSize: "11px", color: "silver" }}>Optional</span>
+    </label>
+    <input
+      style={{ color: "black" }}
+      type="file"
+      id="avatar"
+      accept="image"
+      required={false}
+      onChange={(e) => handleFile(e)}
+    />
+  </div> */}
 
-        <div>
-          <Button type="primary">Sign Up</Button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Button type="primary">Update Profile</Button>
+          <Link to="/app/cities">
+            <Button type="primary">Cancel</Button>
+          </Link>
         </div>
       </form>
       <Toaster position="bottom-center" />
+      <h2>Want to delete your account? Contact your app administrator.</h2>
     </main>
   );
 }
-
-// TODO: ingnore spelling in amplify code email
-// Amplify code confirmation email:
-/* <div style="background-color:#3a3f44; text-align: center; font-family: 'Courier New'; height: 100vh">
-    <h1 style="color:#a89753"> Your GeoNotes Code: </h1>
-    <div style="color:white; font-family:'Arial'; font-size:32px; width: 60%; background-color:grey; text-align: center; margin: auto">
-{####}
-    </div>
-    <p style="color:yellow">Note: This code expires in 1 hour.</p>
-    <hr style="width:90%">
-    <p style="color:white; font-size: 12px">Didn't request a code?  You can ingnore this email.</p>
-    <hr style="width:90%">
-</div> */
