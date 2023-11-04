@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import toast, { Toaster } from "react-hot-toast";
+import { sleep } from "../utils/utils";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
 import Button from "../components/Button";
 import styles from "./Login.module.css";
-import { sleep } from "../utils/utils";
 import parse from "html-react-parser";
+
+// import { Storage } from "aws-amplify";
 
 const toastStyle = { fontSize: "20px" };
 
@@ -49,13 +51,14 @@ function validateName(firstName, lastName) {
   return true;
 }
 
+/* eslint react/prop-types: 0 */
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [avatar, setAvatar] = useState("");
+  // const [avatar, setAvatar] = useState("");
   const navigate = useNavigate();
 
   async function handleSubmit(
@@ -65,7 +68,7 @@ export default function SignUp() {
     lastName,
     password,
     passwordConfirm,
-    avatar,
+    // avatar,
     setPassword,
     setPasswordConfirm
   ) {
@@ -77,17 +80,6 @@ export default function SignUp() {
 
     // TODO: Check if allowed in list of DBs, i.e. whitelisted friends and family
 
-    // TODO: Try this
-    // Auth.signIn(user.Username, user.Password)
-    // .then((res) => {
-    //     AsyncStorage.setItem('token', JSON.stringify(user))
-    //     .then(res =>{
-    //         console.log('saved')
-    //     })
-    //     .catch(err=>{
-    //         console.log(err)
-    //     })
-
     try {
       await Auth.signUp({
         username: email,
@@ -96,23 +88,33 @@ export default function SignUp() {
           email,
           name: firstName,
           family_name: lastName,
-          picture: avatar,
-        },
-        autoSignIn: {
-          // optional - enables auto sign in after user is confirmed
-          enabled: true,
+          // TODO: remove blank
+          picture: "",
         },
       });
 
       // TODO: button state change when submitting
+      // const upload = await Storage.put(avatar.name, avatar, {
+      //   level: "private",
+      //   contentType: "image/*",
+      //   completeCallback: (event) => {
+      //     console.log(`Successfully uploaded ${event.key}`);
+      //   },
+      //   errorCallback: (err) => {
+      //     console.error("Unexpected error while uploading", err);
+      //   },
+      // });
+
+      // console.log(upload);
 
       toast.success("Successfully signed up!", { style: toastStyle });
       await sleep(2500);
 
       navigate("/confirm", { state: { email } });
     } catch (error) {
-      // TODO: Check previously signed up, happens in this catch as certain exception type
+      // TODO: Check previously signed up, happens in this catch as certain exception type UsernameExistsException:
       // TODO: Check password requirements:
+      // TODO: InvalidAccessKeyId: The AWS Access Key Id you provided does not exist in our records.
       // InvalidPasswordException: Password did not conform with policy: Password not long enough
       setPassword("");
       setPasswordConfirm("");
@@ -121,6 +123,11 @@ export default function SignUp() {
       await sleep(2500);
     }
   }
+
+  // async function handleFile(e) {
+  //   console.log(e.target.files[0]);
+  //   setAvatar(e.target.files[0]);
+  // }
 
   const formRows = [
     {
@@ -165,15 +172,6 @@ export default function SignUp() {
       handleFn: setPasswordConfirm,
       value: passwordConfirm,
     },
-    {
-      htmlFor: "avatar",
-      text: "Avatar",
-      type: "file",
-      id: "avatar",
-      accept: "image/*",
-      handleFn: setAvatar,
-      value: avatar,
-    },
   ];
 
   return (
@@ -191,17 +189,31 @@ export default function SignUp() {
             lastName,
             password,
             passwordConfirm,
-            avatar,
+            // avatar,
             setPassword,
             setPasswordConfirm
           )
         }
       >
-        {/* TODO: */}
-        {/* accept="image/*" for avatar */}
         {formRows.map((formRow) => (
           <FormRow key={formRow.id} {...formRow} />
         ))}
+
+        {/* Avatar form row input */}
+        {/* <div className={styles.row}>
+          <label htmlFor="avatar">
+            Avatar <br />
+            <span style={{ fontSize: "11px", color: "silver" }}>Optional</span>
+          </label>
+          <input
+            style={{ color: "black" }}
+            type="file"
+            id="avatar"
+            accept="image"
+            required={false}
+            onChange={(e) => handleFile(e)}
+          />
+        </div> */}
 
         <div>
           <Button type="primary">Sign Up</Button>
@@ -212,9 +224,9 @@ export default function SignUp() {
   );
 }
 
+// TODO: ingnore spelling in amplify code email
 // Amplify code confirmation email:
-{
-  /* <div style="background-color:#3a3f44; text-align: center; font-family: 'Courier New'; height: 100vh">
+/* <div style="background-color:#3a3f44; text-align: center; font-family: 'Courier New'; height: 100vh">
     <h1 style="color:#a89753"> Your GeoNotes Code: </h1>
     <div style="color:white; font-family:'Arial'; font-size:32px; width: 60%; background-color:grey; text-align: center; margin: auto">
 {####}
@@ -224,4 +236,3 @@ export default function SignUp() {
     <p style="color:white; font-size: 12px">Didn't request a code?  You can ingnore this email.</p>
     <hr style="width:90%">
 </div> */
-}

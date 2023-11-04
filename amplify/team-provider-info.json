@@ -14,6 +14,15 @@
     "categories": {
       "auth": {
         "GeoNotes": {}
+      },
+      "function": {
+        "S3Trigger5ebb0092": {
+          "deploymentBucketName": "amplify-geonotes-dev-152221-deployment",
+          "s3Key": "amplify-builds/S3Trigger5ebb0092-524f744b615663717465-build.zip"
+        }
+      },
+      "storage": {
+        "avatars": {}
       }
     }
   }

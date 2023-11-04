@@ -6,6 +6,7 @@ export default function FormRow({ htmlFor, text, type, id, handleFn, value }) {
     <div className={styles.row}>
       <label htmlFor={htmlFor}>{text}</label>
       <input
+        style={{ color: "black" }}
         type={type}
         id={id}
         onChange={(e) => handleFn(e.target.value)}
