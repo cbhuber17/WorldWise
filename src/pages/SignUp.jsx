@@ -9,7 +9,7 @@ import Button from "../components/Button";
 import styles from "./Login.module.css";
 import parse from "html-react-parser";
 
-// import { Storage } from "aws-amplify";
+import { Storage } from "aws-amplify";
 
 const toastStyle = { fontSize: "20px" };
 
@@ -58,7 +58,7 @@ export default function SignUp() {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  // const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState("");
   const navigate = useNavigate();
 
   async function handleSubmit(
@@ -68,7 +68,7 @@ export default function SignUp() {
     lastName,
     password,
     passwordConfirm,
-    // avatar,
+    avatar,
     setPassword,
     setPasswordConfirm
   ) {
@@ -94,18 +94,18 @@ export default function SignUp() {
       });
 
       // TODO: button state change when submitting
-      // const upload = await Storage.put(avatar.name, avatar, {
-      //   level: "private",
-      //   contentType: "image/*",
-      //   completeCallback: (event) => {
-      //     console.log(`Successfully uploaded ${event.key}`);
-      //   },
-      //   errorCallback: (err) => {
-      //     console.error("Unexpected error while uploading", err);
-      //   },
-      // });
+      const upload = await Storage.put(avatar.name, avatar, {
+        level: "private",
+        contentType: "image/*",
+        completeCallback: (event) => {
+          console.log(`Successfully uploaded ${event.key}`);
+        },
+        errorCallback: (err) => {
+          console.error("Unexpected error while uploading", err);
+        },
+      });
 
-      // console.log(upload);
+      console.log(upload);
 
       toast.success("Successfully signed up!", { style: toastStyle });
       await sleep(2500);
@@ -124,10 +124,10 @@ export default function SignUp() {
     }
   }
 
-  // async function handleFile(e) {
-  //   console.log(e.target.files[0]);
-  //   setAvatar(e.target.files[0]);
-  // }
+  async function handleFile(e) {
+    console.log(e.target.files[0]);
+    setAvatar(e.target.files[0]);
+  }
 
   const formRows = [
     {
@@ -189,7 +189,7 @@ export default function SignUp() {
             lastName,
             password,
             passwordConfirm,
-            // avatar,
+            avatar,
             setPassword,
             setPasswordConfirm
           )
@@ -200,7 +200,7 @@ export default function SignUp() {
         ))}
 
         {/* Avatar form row input */}
-        {/* <div className={styles.row}>
+        <div className={styles.row}>
           <label htmlFor="avatar">
             Avatar <br />
             <span style={{ fontSize: "11px", color: "silver" }}>Optional</span>
@@ -213,7 +213,7 @@ export default function SignUp() {
             required={false}
             onChange={(e) => handleFile(e)}
           />
-        </div> */}
+        </div>
 
         <div>
           <Button type="primary">Sign Up</Button>
