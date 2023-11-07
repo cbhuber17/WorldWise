@@ -21,9 +21,10 @@ function checkField(field, errorMsg) {
   return true;
 }
 
-function validatePassword(password, passwordConfirm) {
-  if (!checkField(password, "Password")) return false;
-  if (!checkField(passwordConfirm, "Password confirmation")) return false;
+function validatePassword(password, oldPassword, passwordConfirm) {
+  // if (!checkField(password, "Password")) return false;
+  // if (!checkField(oldPassword, "Old password")) return false;
+  // if (!checkField(passwordConfirm, "Password confirmation")) return false;
 
   if (password !== passwordConfirm) {
     toast.error("Passwords to not match", { style: toastStyle });
@@ -57,6 +58,7 @@ export default function UpdateProfile() {
   );
 
   const [password, setPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [firstName, setFirstName] = useState(`${attributes.name}`);
   const [lastName, setLastName] = useState(`${attributes.family_name}`);
@@ -66,6 +68,7 @@ export default function UpdateProfile() {
     e,
     firstName,
     lastName,
+    oldPassword,
     password,
     passwordConfirm,
     // avatar,
@@ -75,7 +78,7 @@ export default function UpdateProfile() {
     e.preventDefault();
 
     // Guard clauses
-    if (!validatePassword(password, passwordConfirm)) return;
+    if (!validatePassword(password, oldPassword, passwordConfirm)) return;
     if (!validateName(firstName, lastName)) return;
 
     // TODO: Check if allowed in list of DBs, i.e. whitelisted friends and family
@@ -85,10 +88,21 @@ export default function UpdateProfile() {
       await Auth.updateUserAttributes(user, {
         name: firstName,
         family_name: lastName,
-        password,
         // TODO: remove blank
-        picture: "",
+        // picture: "",
       });
+
+      if (password) {
+        try {
+          await Auth.changePassword(user, oldPassword, password);
+          toast.success("Successfully updated password!", {
+            style: toastStyle,
+          });
+          await sleep(2500);
+        } catch (err) {
+          console.log(err);
+        }
+      }
 
       // TODO: button state change when submitting
       // const update = await Storage.put(avatar.name, avatar, {
@@ -107,7 +121,7 @@ export default function UpdateProfile() {
       toast.success("Successfully updated profile!", { style: toastStyle });
       await sleep(2500);
 
-      navigate("/app/cities");
+      navigate("/login");
     } catch (error) {
       // TODO: Check previously signed up, happens in this catch as certain exception type UsernameExistsException:
       // TODO: Check password requirements:
@@ -137,6 +151,14 @@ export default function UpdateProfile() {
       id: "last",
       handleFn: setLastName,
       value: lastName,
+    },
+    {
+      htmlFor: "oldPassword",
+      text: "Old Password",
+      type: "password",
+      id: "oldPassword",
+      handleFn: setOldPassword,
+      value: oldPassword,
     },
     {
       htmlFor: "password",
@@ -171,6 +193,7 @@ export default function UpdateProfile() {
             firstName,
             lastName,
             password,
+            oldPassword,
             passwordConfirm,
             // avatar,
             setPassword,
