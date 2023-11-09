@@ -88,8 +88,6 @@ export default function SignUp() {
           email,
           name: firstName,
           family_name: lastName,
-          // TODO: remove blank
-          picture: "",
         },
       });
 
@@ -224,7 +222,6 @@ export default function SignUp() {
   );
 }
 
-// TODO: ingnore spelling in amplify code email
 // Amplify code confirmation email:
 /* <div style="background-color:#3a3f44; text-align: center; font-family: 'Courier New'; height: 100vh">
     <h1 style="color:#a89753"> Your GeoNotes Code: </h1>
@@ -233,6 +230,30 @@ export default function SignUp() {
     </div>
     <p style="color:yellow">Note: This code expires in 1 hour.</p>
     <hr style="width:90%">
-    <p style="color:white; font-size: 12px">Didn't request a code?  You can ingnore this email.</p>
+    <p style="color:white; font-size: 12px">Didn't request a code?  You can ignore this email.</p>
     <hr style="width:90%">
 </div> */
+
+// Amplify S3 buckets policy
+// {
+//   "Version": "2012-10-17",
+//   "Statement": [
+//       {
+//           "Sid": "AvatarAccess",
+//           "Effect": "Allow",
+//           "Principal": "*",
+//           "Action": [
+//               "s3:GetObject",
+//               "s3:GetObjectAcl",
+//               "s3:PutObject",
+//               "s3:PutObjectAcl",
+//               "s3:ListBucket",
+//               "s3:DeleteObject"
+//           ],
+//           "Resource": [
+//               "arn:aws:s3:::geonotesd54bc216f4a64d60a6abe6f29e0efeb4153130-dev",
+//               "arn:aws:s3:::geonotesd54bc216f4a64d60a6abe6f29e0efeb4153130-dev/*"
+//           ]
+//       }
+//   ]
+// }
