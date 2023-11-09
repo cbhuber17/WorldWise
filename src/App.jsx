@@ -11,15 +11,6 @@ import { CitiesProvider } from "./contexts/CitiesContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
-// Components for lazy loading
-// import Product from "./pages/Product";
-// import Pricing from "./pages/Pricing";
-// import Homepage from "./pages/Homepage";
-// import Login from "./pages/Login";
-// import AppLayout from "./pages/AppLayout";
-// import PageNotFound from "./pages/PageNotFound";
-// import SignUp from "./pages/SignUp";
-
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import City from "./components/City";
@@ -43,7 +34,6 @@ const AppLayout = lazy(() => import("./pages/AppLayout"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 const UpdateProfile = lazy(() => import("./pages/UpdateProfile"));
 
-// function App({ signOut, user }) {
 function App() {
   return (
     <AuthProvider>
