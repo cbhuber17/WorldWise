@@ -11,7 +11,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "S3Trigger5ebb0092": {
+    "S3Trigger240b3f34": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -20,7 +20,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "avatars": {
+    "GeoNotesAvatars": {
       "BucketName": "string",
       "Region": "string"
     }

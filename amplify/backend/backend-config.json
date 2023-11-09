@@ -18,9 +18,8 @@
         },
         "signupAttributes": [
           "EMAIL",
-          "NAME",
           "FAMILY_NAME",
-          "PICTURE"
+          "NAME"
         ],
         "socialProviders": [],
         "usernameAttributes": [
@@ -35,32 +34,32 @@
     }
   },
   "function": {
-    "S3Trigger5ebb0092": {
+    "S3Trigger240b3f34": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_S3Trigger5ebb0092_deploymentBucketName": {
+    "AMPLIFY_function_S3Trigger240b3f34_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "S3Trigger5ebb0092"
+          "resourceName": "S3Trigger240b3f34"
         }
       ]
     },
-    "AMPLIFY_function_S3Trigger5ebb0092_s3Key": {
+    "AMPLIFY_function_S3Trigger240b3f34_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "S3Trigger5ebb0092"
+          "resourceName": "S3Trigger240b3f34"
         }
       ]
     }
   },
   "storage": {
-    "avatars": {
+    "GeoNotesAvatars": {
       "dependsOn": [
         {
           "attributes": [
@@ -69,7 +68,7 @@
             "LambdaExecutionRole"
           ],
           "category": "function",
-          "resourceName": "S3Trigger5ebb0092"
+          "resourceName": "S3Trigger240b3f34"
         }
       ],
       "providerPlugin": "awscloudformation",
