@@ -1,17 +1,25 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 import { Auth } from "aws-amplify";
-import { useAuth } from "../contexts/AuthContext";
+import toast from "react-hot-toast";
+import parse from "html-react-parser";
 import { sleep } from "../utils/utils";
-import styles from "./Login.module.css";
+import { useAuth } from "../contexts/AuthContext";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
 import AvatarFormRow from "../components/AvatarFormRow";
 import Button from "../components/Button";
-import parse from "html-react-parser";
+import Spinner from "../components/Spinner";
+import styles from "./Login.module.css";
 
 const toastStyle = { fontSize: "20px" };
+
+function toastError(message) {
+  toast.error(message, {
+    style: toastStyle,
+  });
+  sleep(2500);
+}
 
 function checkField(field, errorMsg) {
   if (!field) {
@@ -59,6 +67,7 @@ export default function UpdateProfile() {
   const [firstName, setFirstName] = useState(attributes.name);
   const [lastName, setLastName] = useState(attributes.family_name);
   const [avatar, setAvatar] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(
     e,
@@ -78,6 +87,7 @@ export default function UpdateProfile() {
     if (!validateName(firstName, lastName)) return;
 
     try {
+      setLoading(true);
       await Auth.updateUserAttributes(user, {
         name: firstName,
         family_name: lastName,
@@ -95,7 +105,6 @@ export default function UpdateProfile() {
         }
       }
 
-      // TODO: button state change when submitting
       if (avatar) {
         await Auth.updateUserAttributes(user, {
           picture: avatar.picture,
@@ -121,15 +130,29 @@ export default function UpdateProfile() {
 
       navigate("/login");
     } catch (error) {
-      // TODO: Check previously signed up, happens in this catch as certain exception type UsernameExistsException:
-      // TODO: Check password requirements:
-      // TODO: InvalidAccessKeyId: The AWS Access Key Id you provided does not exist in our records.
-      // InvalidPasswordException: Password did not conform with policy: Password not long enough
+      setLoading(false);
+      switch (error.name) {
+        case "InvalidAccessKeyId":
+          toastError(
+            `Invalid AWS Access Key ID.  Contact your app administrator.`
+          );
+          break;
+
+        case "InvalidPasswordException":
+          toastError(
+            "Passwords did not confirm to the policy: min 8 characters, with at least: 1 uppercase, 1 lowercase"
+          );
+          break;
+
+        default:
+          console.log("Unknown exception: ", error);
+          toastError(error);
+          await sleep(2500);
+          throw error;
+      }
+
       setPassword("");
       setPasswordConfirm("");
-      toast.error(error);
-      console.log("Error signing up:", error);
-      await sleep(2500);
     }
   }
 
@@ -207,17 +230,15 @@ export default function UpdateProfile() {
           <FormRow key={formRow.id} {...formRow} />
         ))}
 
-        {/* Avatar form row input */}
         <AvatarFormRow handleFile={handleFile} />
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button type="primary">Update Profile</Button>
           <Link to="/app/cities">
-            <Button type="primary">Cancel</Button>
+            {loading ? <Spinner /> : <Button type="primary">Cancel</Button>}
           </Link>
         </div>
       </form>
-      <Toaster position="bottom-center" />
       <h2>Want to delete your account? Contact your app administrator.</h2>
     </main>
   );
