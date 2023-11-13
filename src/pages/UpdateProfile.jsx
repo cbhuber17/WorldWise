@@ -22,10 +22,6 @@ function checkField(field, errorMsg) {
 }
 
 function validatePassword(password, oldPassword, passwordConfirm) {
-  // if (!checkField(password, "Password")) return false;
-  // if (!checkField(oldPassword, "Old password")) return false;
-  // if (!checkField(passwordConfirm, "Password confirmation")) return false;
-
   if (password !== passwordConfirm) {
     toast.error("Passwords to not match", { style: toastStyle });
     return false;
@@ -85,7 +81,6 @@ export default function UpdateProfile() {
       await Auth.updateUserAttributes(user, {
         name: firstName,
         family_name: lastName,
-        picture: avatar.picture,
       });
 
       if (password) {
@@ -101,18 +96,23 @@ export default function UpdateProfile() {
       }
 
       // TODO: button state change when submitting
-      const update = await Storage.put(avatar.name, avatar, {
-        level: "private",
-        contentType: "image/*",
-        completeCallback: (event) => {
-          console.log(`Successfully uploaded ${event.key}`);
-        },
-        errorCallback: (err) => {
-          console.error("Unexpected error while uploading", err);
-        },
-      });
+      if (avatar) {
+        await Auth.updateUserAttributes(user, {
+          picture: avatar.picture,
+        });
+        const update = await Storage.put(avatar.name, avatar, {
+          level: "private",
+          contentType: "image/*",
+          completeCallback: (event) => {
+            console.log(`Successfully uploaded ${event.key}`);
+          },
+          errorCallback: (err) => {
+            console.error("Unexpected error while uploading", err);
+          },
+        });
 
-      console.log(update);
+        console.log(update);
+      }
 
       // TODO: Delete old avatar on S3?
 
