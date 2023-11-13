@@ -1,33 +1,35 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 import Button from "../components/Button";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
+import Spinner from "../components/Spinner";
 import styles from "./Login.module.css";
-import { useAuth } from "../contexts/AuthContext";
 
 export default function Login() {
-  // PRE-FILL FOR DEV PURPOSES
-  // const [email, setEmail] = useState("jack@example.com");
-  // const [password, setPassword] = useState("qwerty");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   function handleSubmit(e) {
+    setLoading(true);
     e.preventDefault();
 
     if (email && password) login(email, password);
+    setTimeout(() => setLoading(false), 1500);
   }
-
-  // TODO: button state change when submitting
 
   // After user is authenticated, move to app
   useEffect(
     function () {
-      if (isAuthenticated) navigate("/app", { replace: true }); // replace allows the user to go back to the page before the login page
+      if (isAuthenticated)
+        navigate("/app", {
+          replace: true,
+        }); // replace allows the user to go back to the page before the login page
     },
     [isAuthenticated, navigate]
   );
@@ -62,7 +64,7 @@ export default function Login() {
         ))}
 
         <div>
-          <Button type="primary">Sign in</Button>
+          {loading ? <Spinner /> : <Button type="primary">Sign in</Button>}
         </div>
       </form>
     </main>
