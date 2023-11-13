@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { sleep } from "../utils/utils";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
+import AvatarFormRow from "../components/AvatarFormRow";
 import Button from "../components/Button";
 import styles from "./Login.module.css";
 import parse from "html-react-parser";
@@ -193,21 +194,7 @@ export default function SignUp() {
           <FormRow key={formRow.id} {...formRow} />
         ))}
 
-        {/* Avatar form row input */}
-        <div className={styles.row}>
-          <label htmlFor="avatar">
-            Avatar <br />
-            <span style={{ fontSize: "11px", color: "silver" }}>Optional</span>
-          </label>
-          <input
-            style={{ color: "black" }}
-            type="file"
-            id="avatar"
-            accept="image"
-            required={false}
-            onChange={(e) => handleFile(e)}
-          />
-        </div>
+        <AvatarFormRow handleFile={handleFile} />
 
         <div>
           <Button type="primary">Sign Up</Button>

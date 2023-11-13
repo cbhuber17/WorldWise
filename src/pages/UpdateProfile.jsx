@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { Auth } from "aws-amplify";
+import { useAuth } from "../contexts/AuthContext";
+import { sleep } from "../utils/utils";
 import styles from "./Login.module.css";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
+import AvatarFormRow from "../components/AvatarFormRow";
 import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import toast, { Toaster } from "react-hot-toast";
 import parse from "html-react-parser";
-import { sleep } from "../utils/utils";
-import { Auth } from "aws-amplify";
-import { Link } from "react-router-dom";
 
 const toastStyle = { fontSize: "20px" };
 
@@ -60,9 +60,9 @@ export default function UpdateProfile() {
   const [password, setPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [firstName, setFirstName] = useState(`${attributes.name}`);
-  const [lastName, setLastName] = useState(`${attributes.family_name}`);
-  // const [avatar, setAvatar] = useState("");
+  const [firstName, setFirstName] = useState(attributes.name);
+  const [lastName, setLastName] = useState(attributes.family_name);
+  const [avatar, setAvatar] = useState("");
 
   async function handleSubmit(
     e,
@@ -71,7 +71,7 @@ export default function UpdateProfile() {
     oldPassword,
     password,
     passwordConfirm,
-    // avatar,
+    avatar,
     setPassword,
     setPasswordConfirm
   ) {
@@ -81,15 +81,11 @@ export default function UpdateProfile() {
     if (!validatePassword(password, oldPassword, passwordConfirm)) return;
     if (!validateName(firstName, lastName)) return;
 
-    // TODO: Check if allowed in list of DBs, i.e. whitelisted friends and family
-
     try {
-      // TODO: Check for blank entries
       await Auth.updateUserAttributes(user, {
         name: firstName,
         family_name: lastName,
-        // TODO: remove blank
-        // picture: "",
+        picture: avatar.picture,
       });
 
       if (password) {
@@ -105,18 +101,20 @@ export default function UpdateProfile() {
       }
 
       // TODO: button state change when submitting
-      // const update = await Storage.put(avatar.name, avatar, {
-      //   level: "private",
-      //   contentType: "image/*",
-      //   completeCallback: (event) => {
-      //     console.log(`Successfully uploaded ${event.key}`);
-      //   },
-      //   errorCallback: (err) => {
-      //     console.error("Unexpected error while uploading", err);
-      //   },
-      // });
+      const update = await Storage.put(avatar.name, avatar, {
+        level: "private",
+        contentType: "image/*",
+        completeCallback: (event) => {
+          console.log(`Successfully uploaded ${event.key}`);
+        },
+        errorCallback: (err) => {
+          console.error("Unexpected error while uploading", err);
+        },
+      });
 
-      // console.log(update);
+      console.log(update);
+
+      // TODO: Delete old avatar on S3?
 
       toast.success("Successfully updated profile!", { style: toastStyle });
       await sleep(2500);
@@ -133,6 +131,10 @@ export default function UpdateProfile() {
       console.log("Error signing up:", error);
       await sleep(2500);
     }
+  }
+
+  async function handleFile(e) {
+    setAvatar(e.target.files[0]);
   }
 
   const formRows = [
@@ -195,7 +197,7 @@ export default function UpdateProfile() {
             password,
             oldPassword,
             passwordConfirm,
-            // avatar,
+            avatar,
             setPassword,
             setPasswordConfirm
           )
@@ -206,20 +208,7 @@ export default function UpdateProfile() {
         ))}
 
         {/* Avatar form row input */}
-        {/* <div className={styles.row}>
-    <label htmlFor="avatar">
-      Avatar <br />
-      <span style={{ fontSize: "11px", color: "silver" }}>Optional</span>
-    </label>
-    <input
-      style={{ color: "black" }}
-      type="file"
-      id="avatar"
-      accept="image"
-      required={false}
-      onChange={(e) => handleFile(e)}
-    />
-  </div> */}
+        <AvatarFormRow handleFile={handleFile} />
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button type="primary">Update Profile</Button>
