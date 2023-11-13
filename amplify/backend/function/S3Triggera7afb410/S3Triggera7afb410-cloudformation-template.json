@@ -34,12 +34,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "S3Trigger240b3f34",
+            "S3Triggera7afb410",
             {
               "Fn::Join": [
                 "",
                 [
-                  "S3Trigger240b3f34",
+                  "S3Triggera7afb410",
                   "-",
                   {
                     "Ref": "env"
@@ -80,12 +80,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "S3Trigger240b3f34LambdaRole240b3f34",
+            "S3Triggera7afb410LambdaRolea7afb410",
             {
               "Fn::Join": [
                 "",
                 [
-                  "S3Trigger240b3f34LambdaRole240b3f34",
+                  "S3Triggera7afb410LambdaRolea7afb410",
                   "-",
                   {
                     "Ref": "env"

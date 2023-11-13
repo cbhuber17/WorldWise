@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import { Auth, Storage } from "aws-amplify";
 import toast, { Toaster } from "react-hot-toast";
 import { sleep } from "../utils/utils";
 import PageNav from "../components/PageNav";
@@ -8,8 +8,6 @@ import FormRow from "../components/FormRow";
 import Button from "../components/Button";
 import styles from "./Login.module.css";
 import parse from "html-react-parser";
-
-import { Storage } from "aws-amplify";
 
 const toastStyle = { fontSize: "20px" };
 
@@ -88,11 +86,12 @@ export default function SignUp() {
           email,
           name: firstName,
           family_name: lastName,
+          picture: avatar.name,
         },
       });
 
       // TODO: button state change when submitting
-      const upload = await Storage.put(avatar.name, avatar, {
+      await Storage.put(avatar.name, avatar, {
         level: "private",
         contentType: "image/*",
         completeCallback: (event) => {
@@ -102,8 +101,6 @@ export default function SignUp() {
           console.error("Unexpected error while uploading", err);
         },
       });
-
-      console.log(upload);
 
       toast.success("Successfully signed up!", { style: toastStyle });
       await sleep(2500);
@@ -173,7 +170,6 @@ export default function SignUp() {
   ];
 
   return (
-    // Change style
     <main className={styles.login}>
       <PageNav />
       <h1>Sign up for GeoNotes!</h1>
@@ -251,8 +247,8 @@ export default function SignUp() {
 //               "s3:DeleteObject"
 //           ],
 //           "Resource": [
-//               "arn:aws:s3:::geonotesd54bc216f4a64d60a6abe6f29e0efeb4153130-dev",
-//               "arn:aws:s3:::geonotesd54bc216f4a64d60a6abe6f29e0efeb4153130-dev/*"
+//               "arn:aws:s3:::geonotes1aed35f17cbd4e51ac5b5ffceb95023d175918-dev",
+//               "arn:aws:s3:::geonotes1aed35f17cbd4e51ac5b5ffceb95023d175918-dev/*"
 //           ]
 //       }
 //   ]

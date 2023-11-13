@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "geonotfa592b31",
+    "resourceNameTruncated": "geonot3ca68ea9",
     "userPoolName": "GeoNotes",
     "autoVerifiedAttributes": [
       "email"
@@ -15,7 +15,7 @@
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "GeoNotes Verification Code",
-    "emailVerificationMessage": "Verification code: {####}/* <div style=\"background-color:#3a3f44; text-align: center; font-family: 'Courier New'; height: 100vh\">\n    <h1 style=\"color:#a89753\"> Your GeoNotes Code: </h1>\n    <div style=\"color:white; font-family:'Arial'; font-size:32px; width: 60%; background-color:grey; text-align: center; margin: auto\">\n{####}\n    </div>\n    <p style=\"color:yellow\">Note: This code expires in 1 hour.</p>\n    <hr style=\"width:90%\">\n    <p style=\"color:white; font-size: 12px\">Didn't request a code?  You can ignore this email.</p>\n    <hr style=\"width:90%\">\n</div> */",
+    "emailVerificationMessage": "<div style=\"background-color:#3a3f44; text-align: center; font-family: 'Courier New'; height: 100vh\">\n    <h1 style=\"color:#a89753\"> Your GeoNotes Code: </h1>\n    <div style=\"color:white; font-family:'Arial'; font-size:32px; width: 60%; background-color:grey; text-align: center; margin: auto\">\n{####}\n    </div>\n    <p style=\"color:yellow\">Note: This code expires in 1 hour.</p>\n    <hr style=\"width:90%\">\n    <p style=\"color:white; font-size: 12px\">Didn't request a code?  You can ignore this email.</p>\n    <hr style=\"width:90%\">\n</div>",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [
@@ -26,16 +26,17 @@
     "requiredAttributes": [
       "email",
       "family_name",
-      "name"
+      "name",
+      "picture"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "GeoNotfa592b31_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "GeoNot3ca68ea9_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "fa592b31",
+    "sharedId": "3ca68ea9",
     "resourceName": "GeoNotes",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",

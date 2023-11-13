@@ -1,7 +1,7 @@
 {
   "resourceName": "GeoNotesAvatars",
-  "policyUUID": "4b44fe00",
-  "bucketName": "geonotesd54bc216f4a64d60a6abe6f29e0efeb4",
+  "policyUUID": "7c701467",
+  "bucketName": "geonotes1aed35f17cbd4e51ac5b5ffceb95023d",
   "storageAccess": "authAndGuest",
   "guestAccess": [
     "READ"
@@ -11,6 +11,6 @@
     "READ",
     "DELETE"
   ],
-  "triggerFunction": "S3Trigger240b3f34",
+  "triggerFunction": "S3Triggera7afb410",
   "groupAccess": {}
 }

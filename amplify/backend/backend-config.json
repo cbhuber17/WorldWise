@@ -19,7 +19,8 @@
         "signupAttributes": [
           "EMAIL",
           "FAMILY_NAME",
-          "NAME"
+          "NAME",
+          "PICTURE"
         ],
         "socialProviders": [],
         "usernameAttributes": [
@@ -34,26 +35,26 @@
     }
   },
   "function": {
-    "S3Trigger240b3f34": {
+    "S3Triggera7afb410": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_S3Trigger240b3f34_deploymentBucketName": {
+    "AMPLIFY_function_S3Triggera7afb410_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "S3Trigger240b3f34"
+          "resourceName": "S3Triggera7afb410"
         }
       ]
     },
-    "AMPLIFY_function_S3Trigger240b3f34_s3Key": {
+    "AMPLIFY_function_S3Triggera7afb410_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "S3Trigger240b3f34"
+          "resourceName": "S3Triggera7afb410"
         }
       ]
     }
@@ -68,7 +69,7 @@
             "LambdaExecutionRole"
           ],
           "category": "function",
-          "resourceName": "S3Trigger240b3f34"
+          "resourceName": "S3Triggera7afb410"
         }
       ],
       "providerPlugin": "awscloudformation",

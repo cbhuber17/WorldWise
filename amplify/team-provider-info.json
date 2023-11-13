@@ -1,24 +1,24 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-geonotes-dev-153130-authRole",
-      "UnauthRoleArn": "arn:aws:iam::630372904178:role/amplify-geonotes-dev-153130-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::630372904178:role/amplify-geonotes-dev-153130-authRole",
+      "AuthRoleName": "amplify-geonotes-dev-175918-authRole",
+      "UnauthRoleArn": "arn:aws:iam::630372904178:role/amplify-geonotes-dev-175918-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::630372904178:role/amplify-geonotes-dev-175918-authRole",
       "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-geonotes-dev-153130-deployment",
-      "UnauthRoleName": "amplify-geonotes-dev-153130-unauthRole",
-      "StackName": "amplify-geonotes-dev-153130",
-      "StackId": "arn:aws:cloudformation:us-west-2:630372904178:stack/amplify-geonotes-dev-153130/66d155b0-7dbd-11ee-9251-06f3a8509717",
-      "AmplifyAppId": "d3j9vvp3ne7v1e"
+      "DeploymentBucketName": "amplify-geonotes-dev-175918-deployment",
+      "UnauthRoleName": "amplify-geonotes-dev-175918-unauthRole",
+      "StackName": "amplify-geonotes-dev-175918",
+      "StackId": "arn:aws:cloudformation:us-west-2:630372904178:stack/amplify-geonotes-dev-175918/e1176ed0-81bf-11ee-9980-02695afe9ee7",
+      "AmplifyAppId": "d2y83ueuh7b68o"
     },
     "categories": {
       "auth": {
         "GeoNotes": {}
       },
       "function": {
-        "S3Trigger240b3f34": {
-          "deploymentBucketName": "amplify-geonotes-dev-153130-deployment",
-          "s3Key": "amplify-builds/S3Trigger240b3f34-42322f6330384a6f4e53-build.zip"
+        "S3Triggera7afb410": {
+          "deploymentBucketName": "amplify-geonotes-dev-175918-deployment",
+          "s3Key": "amplify-builds/S3Triggera7afb410-5a342f36717344655a4e-build.zip"
         }
       },
       "storage": {
