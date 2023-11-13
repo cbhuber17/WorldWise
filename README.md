@@ -30,16 +30,17 @@ It is built using:
 - **Remove city:** The user can remove a city from their list by clicking the "&times;" button next to the city in the list. The marker for the city will then be removed from the map.
 - **Edit and update city** The user can edit and update the information for existing cities in the list. To do this, simply click on the city in the list and then click the "EDIT" button.
 - **Current user geolocation:** The user can click the "USE YOUR POSITION" button to navigate the map to their current user's geolocation.
-- **Database:** The list of cities is persisted in a database per account, so that the user's list is preserved even if they close the browser or navigate to a different page.
-- **Login and logout functionality:** GeoNotes allows users to log in and out of their accounts.
+- **Database:** The list of cities is persisted in a database on pockethost.io per account, so that the user's list is preserved even if they close the browser or navigate to a different page.
+- **Login and logout functionality:** GeoNotes allows users to log in and out of their accounts. AWS Amplify is used as the backend for authentication, avatar image storage in S3, and lambda function to resize avatar to small images.
+
+Contact me if you want a demo account!
 
 ## TODO:
 
-- Forgot password/account recovery
-- Allow to view other people's travels read-only
+- Forgot password/account recovery: https://docs.amplify.aws/lib/auth/password_management/q/platform/js/#change-to-a-new-password-via-self-service
+- Allow to view other people's travels read-only - Set a isReadOnly var in AuthContext.jsx, then use it in CityList and Map.jsx DetectClick component
 - Center map on popup when clicking a CityItem, perhaps useRef for map and pass it to CityItem
 - MAIN.JSX add strict mode for production
-- Fill out this readme info
 - Check responsiveness
 - "Use your position" with a popup active didn't move to position
 - SignUp post-confirm email, "Welcome to GeoNotes!". Will need email backend.
