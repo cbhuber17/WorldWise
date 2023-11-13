@@ -1,16 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Auth, Storage } from "aws-amplify";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { sleep } from "../utils/utils";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
+import Spinner from "../components/Spinner";
 import AvatarFormRow from "../components/AvatarFormRow";
 import Button from "../components/Button";
 import styles from "./Login.module.css";
 import parse from "html-react-parser";
 
 const toastStyle = { fontSize: "20px" };
+
+function toastError(message) {
+  toast.error(message, {
+    style: toastStyle,
+  });
+  sleep(2500);
+}
 
 function validateEmail(email) {
   var re = /\S+@\S+\.\S+/;
@@ -58,6 +66,7 @@ export default function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   async function handleSubmit(
@@ -80,6 +89,7 @@ export default function SignUp() {
     // TODO: Check if allowed in list of DBs, i.e. whitelisted friends and family
 
     try {
+      setLoading(true);
       await Auth.signUp({
         username: email,
         password,
@@ -91,7 +101,6 @@ export default function SignUp() {
         },
       });
 
-      // TODO: button state change when submitting
       await Storage.put(avatar.name, avatar, {
         level: "private",
         contentType: "image/*",
@@ -108,20 +117,39 @@ export default function SignUp() {
 
       navigate("/confirm", { state: { email } });
     } catch (error) {
-      // TODO: Check previously signed up, happens in this catch as certain exception type UsernameExistsException:
-      // TODO: Check password requirements:
-      // TODO: InvalidAccessKeyId: The AWS Access Key Id you provided does not exist in our records.
-      // InvalidPasswordException: Password did not conform with policy: Password not long enough
+      setLoading(false);
+      switch (error.name) {
+        case "UsernameExistsException":
+          toastError(
+            `User account email ${email} already exists. Use a different email.`
+          );
+          break;
+
+        case "InvalidAccessKeyId":
+          toastError(
+            `Invalid AWS Access Key ID.  Contact your app administrator.`
+          );
+          break;
+
+        case "InvalidPasswordException":
+          toastError(
+            "Passwords did not confirm to the policy: min 8 characters, with at least: 1 uppercase, 1 lowercase"
+          );
+          break;
+
+        default:
+          console.log("Unknown exception: ", error);
+          toastError(error);
+          await sleep(2500);
+          throw error;
+      }
+
       setPassword("");
       setPasswordConfirm("");
-      toast.error(error);
-      console.log("Error signing up:", error);
-      await sleep(2500);
     }
   }
 
   async function handleFile(e) {
-    console.log(e.target.files[0]);
     setAvatar(e.target.files[0]);
   }
 
@@ -197,10 +225,9 @@ export default function SignUp() {
         <AvatarFormRow handleFile={handleFile} />
 
         <div>
-          <Button type="primary">Sign Up</Button>
+          {loading ? <Spinner /> : <Button type="primary">Sign Up</Button>}
         </div>
       </form>
-      <Toaster position="bottom-center" />
     </main>
   );
 }
