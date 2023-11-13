@@ -10,6 +10,15 @@ const initialState = {
   isAuthenticated: false,
 };
 
+const toastStyle = { fontSize: "20px" };
+
+function toastError(message) {
+  toast.error(message, {
+    style: toastStyle,
+  });
+  sleep(2500);
+}
+
 function reducer(state, action) {
   switch (action.type) {
     case "login":
@@ -35,16 +44,16 @@ function AuthProvider({ children }) {
       if (user) {
         dispatch({ type: "login", payload: user });
       }
-    } catch (e) {
-      if (e.name === "NotAuthorizedException") {
-        toast.error("Invalid login credentials.", {
-          style: { fontSize: "20px" },
-        });
-        sleep(2500);
-        console.log("Invalid login credentials.");
-      } else {
-        console.log("error signing in", e);
-        throw e;
+    } catch (error) {
+      switch (error.name) {
+        case "NotAuthorizedException":
+          toastError("Invalid login credentials.");
+          break;
+
+        default:
+          toastError("Error signing in");
+          console.log(error);
+          throw error;
       }
     }
   }
@@ -54,7 +63,8 @@ function AuthProvider({ children }) {
       await Auth.signOut();
       dispatch({ type: "logout" });
     } catch (error) {
-      console.log("error signing out: ", error);
+      toastError("Error signing out");
+      console.log("Error signing out: ", error);
     }
   }
 
