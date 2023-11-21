@@ -13,6 +13,8 @@ import parse from "html-react-parser";
 
 const toastStyle = { fontSize: "20px" };
 
+const allowedDbUsers = import.meta.env.VITE_DB_USERS.split(",");
+
 function toastError(message) {
   toast.error(message, {
     style: toastStyle,
@@ -86,7 +88,15 @@ export default function SignUp() {
     if (!validateEmailPassword(email, password, passwordConfirm)) return;
     if (!validateName(firstName, lastName)) return;
 
-    // TODO: Check if allowed in list of DBs, i.e. whitelisted friends and family
+    // Check if allowed in list of DBs, i.e. whitelisted friends and family
+    if (!allowedDbUsers.includes(email)) {
+      console.log(`${email} not allowed`);
+      toast.error(
+        `User ${email} does not have permission. Contact the app admin for access.`,
+        { style: toastStyle }
+      );
+      return;
+    }
 
     try {
       setLoading(true);

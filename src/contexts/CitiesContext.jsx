@@ -16,6 +16,7 @@ const initialState = {
   cities: [],
   isLoading: false,
   currentCity: {},
+  dbUser: null,
   error: "",
 };
 
@@ -57,6 +58,9 @@ function reducer(state, action) {
         error: action.payload,
       };
 
+    case "db/load":
+      return { ...state, dbUser: action.payload };
+
     default:
       throw new Error("Unknown action type");
   }
@@ -64,16 +68,15 @@ function reducer(state, action) {
 
 /* eslint react/prop-types: 0 */
 function CitiesProvider({ children }) {
-  const [{ cities, isLoading, currentCity, error }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ cities, isLoading, currentCity, dbUser, error }, dispatch] =
+    useReducer(reducer, initialState);
 
   useEffect(function () {
     async function fetchCities() {
       dispatch({ type: "loading" });
 
       try {
+        // TODO: Change to dbUser
         const data = await db.collection(db_collection).getFullList({
           sort: "-date",
           requestKey: "getCities",
@@ -100,6 +103,7 @@ function CitiesProvider({ children }) {
       dispatch({ type: "loading" });
 
       try {
+        // TODO: change to dbUser
         const data = await db.collection(db_collection).getOne(id);
         dispatch({ type: "city/loaded", payload: data });
       } catch (error) {
@@ -117,6 +121,7 @@ function CitiesProvider({ children }) {
     dispatch({ type: "loading" });
 
     try {
+      // TODO: change to dbUser
       const data = await db
         .collection(db_collection)
         .create(JSON.stringify(newCity));
@@ -135,6 +140,7 @@ function CitiesProvider({ children }) {
     dispatch({ type: "loading" });
 
     try {
+      // TODO: change to dbUser
       await db.collection(db_collection).delete(id);
 
       dispatch({ type: "city/deleted", payload: id });
@@ -153,6 +159,7 @@ function CitiesProvider({ children }) {
         cities,
         isLoading,
         currentCity,
+        dbUser,
         error,
         getCity,
         createCity,
