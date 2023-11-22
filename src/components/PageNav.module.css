@@ -16,6 +16,10 @@
   list-style: none;
   display: flex;
   align-items: center;
+
+  @media (max-width: 400px) {
+    gap: 2rem;
+  }
   gap: 4rem;
 }
 

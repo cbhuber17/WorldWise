@@ -6,7 +6,7 @@ import styles from "./PageNav.module.css";
 function PageNav() {
   return (
     <nav className={styles.nav}>
-      <Link to="/" style={{ display: "flex" }}>
+      <Link to="/" style={{ display: "flex", justifyContent: "center" }}>
         <Logo />
         <Title />
       </Link>
