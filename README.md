@@ -33,19 +33,16 @@ It is built using:
 - **Database:** The list of cities is persisted in a database on pockethost.io per account, so that the user's list is preserved even if they close the browser or navigate to a different page.
 - **Login and logout functionality:** GeoNotes allows users to log in and out of their accounts. AWS Amplify is used as the backend for authentication, avatar image storage in S3, and lambda function to resize avatar to small images.
 
-Contact me if you want a demo account!
+Contact me if you want to view a demo account!
 
 ## TODO:
 
 - Forgot password/account recovery: https://docs.amplify.aws/lib/auth/password_management/q/platform/js/#change-to-a-new-password-via-self-service
-- Allow to view other people's travels read-only - Set a isReadOnly var in AuthContext.jsx, then use it in CityList and Map.jsx DetectClick component
 - Center map on popup when clicking a CityItem, perhaps useRef for map and pass it to CityItem
 - MAIN.JSX add strict mode for production
 - Check responsiveness
 - "Use your position" with a popup active didn't move to position
 - SignUp post-confirm email, "Welcome to GeoNotes!". Will need email backend.
 - Confirm page send code email again
-- Check DBs, only whitelist "allowed users", e.g. friends and family.
 - Address TODOs in code
-- Key=index should not be used, need a better static unique id
 - Signing up causes console error: SignUp.jsx?t=1699897158672:98 POST https://cognito-idp.us-west-2.amazonaws.com/ 400 (Bad Request)

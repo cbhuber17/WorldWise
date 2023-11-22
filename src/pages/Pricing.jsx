@@ -16,9 +16,7 @@ export default function Product() {
           <br />
           <p>
             I believe in making travel experiences accessible to all, which is
-            why the travel journal web app is free. I want to encourage people
-            from all walks of life to document and cherish their journeys
-            without any financial barriers.
+            why the travel journal web app is free.
           </p>
         </div>
         <img
