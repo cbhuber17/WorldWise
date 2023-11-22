@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { useAuth } from "../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -37,6 +39,7 @@ function Form() {
   const [notes, setNotes] = useState("");
   const [emoji, setEmoji] = useState("");
   const [geocodingError, setGeocodingError] = useState("");
+  const { isReadOnly } = useAuth();
 
   useEffect(
     function () {
@@ -85,7 +88,13 @@ function Form() {
       position: { lat, lng },
     };
 
-    await createCity(newCity);
+    if (isReadOnly) {
+      toast.error("Demo only users cannot add a new location.", {
+        style: { fontSize: "20px" },
+      });
+    } else {
+      await createCity(newCity);
+    }
     navigate("/app/cities");
   }
 

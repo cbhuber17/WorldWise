@@ -8,6 +8,7 @@ const AuthContext = createContext();
 const initialState = {
   user: null,
   isAuthenticated: false,
+  isReadOnly: true,
 };
 
 const toastStyle = { fontSize: "20px" };
@@ -25,6 +26,8 @@ function reducer(state, action) {
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
       return { ...state, user: null, isAuthenticated: false };
+    case "user/approved":
+      return { ...state, isReadOnly: false };
     default:
       throw new Error("Unknown action");
   }
@@ -32,7 +35,7 @@ function reducer(state, action) {
 
 /* eslint react/prop-types: 0 */
 function AuthProvider({ children }) {
-  const [{ user, isAuthenticated }, dispatch] = useReducer(
+  const [{ user, isAuthenticated, isReadOnly }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -70,7 +73,9 @@ function AuthProvider({ children }) {
 
   return (
     <>
-      <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+      <AuthContext.Provider
+        value={{ user, isAuthenticated, isReadOnly, login, logout, dispatch }}
+      >
         {children}
       </AuthContext.Provider>
       <Toaster />

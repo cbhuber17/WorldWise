@@ -8,7 +8,7 @@ import styles from "./User.module.css";
 
 function User() {
   const [avatar, setAvatar] = useState("");
-  const { user, logout } = useAuth();
+  const { user, logout, isReadOnly } = useAuth();
   const navigate = useNavigate();
 
   const { attributes } = user;
@@ -38,9 +38,11 @@ function User() {
       />
       <span>Welcome, {attributes.name}</span>
       <button onClick={handleClick}>Logout</button>
-      <Link to="/update-profile" title="Update profile">
-        <IconSettingsOutline />
-      </Link>
+      {isReadOnly ? null : (
+        <Link to="/update-profile" title="Update profile">
+          <IconSettingsOutline />
+        </Link>
+      )}
     </div>
   );
 }

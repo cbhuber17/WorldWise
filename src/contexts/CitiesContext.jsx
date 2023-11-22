@@ -8,7 +8,6 @@ import {
 import PocketBase from "pocketbase";
 
 const db = new PocketBase(import.meta.env.VITE_POCKETHOST_DB_URL);
-const db_collection = "cities_cbhuber";
 
 const CitiesContext = createContext();
 
@@ -59,7 +58,7 @@ function reducer(state, action) {
       };
 
     case "db/load":
-      return { ...state, dbUser: action.payload };
+      return { ...state, dbUser: `cities_${action.payload}` };
 
     default:
       throw new Error("Unknown action type");
@@ -71,27 +70,29 @@ function CitiesProvider({ children }) {
   const [{ cities, isLoading, currentCity, dbUser, error }, dispatch] =
     useReducer(reducer, initialState);
 
-  useEffect(function () {
-    async function fetchCities() {
-      dispatch({ type: "loading" });
+  useEffect(
+    function () {
+      async function fetchCities() {
+        dispatch({ type: "loading" });
 
-      try {
-        // TODO: Change to dbUser
-        const data = await db.collection(db_collection).getFullList({
-          sort: "-date",
-          requestKey: "getCities",
-        });
-        dispatch({ type: "cities/loaded", payload: data });
-      } catch (error) {
-        console.error(error);
-        dispatch({
-          type: "rejected",
-          payload: "There was an error loading cities...",
-        });
+        try {
+          const data = await db.collection(dbUser).getFullList({
+            sort: "-date",
+            requestKey: "getCities",
+          });
+          dispatch({ type: "cities/loaded", payload: data });
+        } catch (error) {
+          console.error(error);
+          dispatch({
+            type: "rejected",
+            payload: "There was an error loading cities...",
+          });
+        }
       }
-    }
-    fetchCities();
-  }, []);
+      if (dbUser) fetchCities();
+    },
+    [dbUser]
+  );
 
   // useCallback Allows getCity() to be used in a useEffect dependency array,
   // without it being called constantly resulting in many re-renderings
@@ -103,8 +104,7 @@ function CitiesProvider({ children }) {
       dispatch({ type: "loading" });
 
       try {
-        // TODO: change to dbUser
-        const data = await db.collection(db_collection).getOne(id);
+        const data = await db.collection(dbUser).getOne(id);
         dispatch({ type: "city/loaded", payload: data });
       } catch (error) {
         console.error(error);
@@ -114,17 +114,14 @@ function CitiesProvider({ children }) {
         });
       }
     },
-    [currentCity.id]
+    [currentCity.id, dbUser]
   );
 
   async function createCity(newCity) {
     dispatch({ type: "loading" });
 
     try {
-      // TODO: change to dbUser
-      const data = await db
-        .collection(db_collection)
-        .create(JSON.stringify(newCity));
+      const data = await db.collection(dbUser).create(JSON.stringify(newCity));
 
       dispatch({ type: "city/created", payload: data });
     } catch (error) {
@@ -140,8 +137,7 @@ function CitiesProvider({ children }) {
     dispatch({ type: "loading" });
 
     try {
-      // TODO: change to dbUser
-      await db.collection(db_collection).delete(id);
+      await db.collection(dbUser).delete(id);
 
       dispatch({ type: "city/deleted", payload: id });
     } catch (error) {
@@ -164,6 +160,7 @@ function CitiesProvider({ children }) {
         getCity,
         createCity,
         deleteCity,
+        dispatch,
       }}
     >
       {children}

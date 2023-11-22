@@ -6,13 +6,15 @@ import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
 import Spinner from "../components/Spinner";
 import styles from "./Login.module.css";
+import { useCities } from "../contexts/CitiesContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, dispatch: dispatchAuth } = useAuth();
+  const { dispatch: dispatchCities } = useCities();
   const navigate = useNavigate();
 
   function handleSubmit(e) {
@@ -26,12 +28,21 @@ export default function Login() {
   // After user is authenticated, move to app
   useEffect(
     function () {
-      if (isAuthenticated)
+      if (isAuthenticated) {
+        const username = email.split("@")[0];
+        // Point to DB
+        dispatchCities({ type: "db/load", payload: username });
+
+        // Check if user is not demo account
+        if (username !== "demo") dispatchAuth({ type: "user/approved" });
+
+        // Move to app
         navigate("/app", {
           replace: true,
         }); // replace allows the user to go back to the page before the login page
+      }
     },
-    [isAuthenticated, navigate]
+    [isAuthenticated, navigate, dispatchAuth, dispatchCities, email]
   );
 
   const formRows = [

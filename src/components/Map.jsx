@@ -70,10 +70,6 @@ function Map({ markersRef }) {
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
         {cities.map((city) => (
-          // <Link
-          //   to={`cities/${city.id}?lat=${city.position.lat}&lng=${city.position.lng}`}
-          //   key={city.id}
-          // >
           <Marker
             position={[city.position.lat, city.position.lng]}
             key={city.id}
@@ -87,7 +83,6 @@ function Map({ markersRef }) {
               <span>{city.emoji}</span> <span>{city.cityName}</span>
             </Popup>
           </Marker>
-          // </Link>
         ))}
 
         <ChangeCenter position={mapPosition} />

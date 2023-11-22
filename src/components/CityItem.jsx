@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useCities } from "../contexts/CitiesContext";
 import styles from "./CityItem.module.css";
+import { useAuth } from "../contexts/AuthContext";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -13,12 +14,13 @@ const formatDate = (date) =>
 function CityItem({ city, markersRef }) {
   const { currentCity, deleteCity } = useCities();
   const { cityName, emoji, date, id, position } = city;
+  const { isReadOnly } = useAuth();
 
   function handleClick(e) {
     e.preventDefault();
 
-    // TODO: Disable when viewing read-only
-    deleteCity(id);
+    // Disable when viewing read-only
+    if (!isReadOnly) deleteCity(id);
   }
 
   function handleListItem(markersRef, id) {
@@ -36,9 +38,12 @@ function CityItem({ city, markersRef }) {
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
         <time className={styles.date}>({formatDate(date)})</time>
-        <button className={styles.deleteBtn} onClick={handleClick}>
-          &times;
-        </button>
+
+        {isReadOnly ? null : (
+          <button className={styles.deleteBtn} onClick={handleClick}>
+            &times;
+          </button>
+        )}
       </Link>
     </li>
   );
