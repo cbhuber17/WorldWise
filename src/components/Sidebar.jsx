@@ -9,10 +9,7 @@ import styles from "./Sidebar.module.css";
 function Sidebar({ markersRef }) {
   return (
     <div className={styles.sidebar}>
-      <Link
-        to="/app/cities"
-        style={{ display: "flex", textDecoration: "none" }}
-      >
+      <Link to="/app/cities">
         <Logo />
         <Title />
       </Link>

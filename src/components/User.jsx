@@ -39,7 +39,11 @@ function User() {
       <span>Welcome, {attributes.name}</span>
       <button onClick={handleClick}>Logout</button>
       {isReadOnly ? null : (
-        <Link to="/update-profile" title="Update profile">
+        <Link
+          to="/update-profile"
+          title="Update profile"
+          style={{ padding: "0 10px" }}
+        >
           <IconSettingsOutline />
         </Link>
       )}
