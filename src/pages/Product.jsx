@@ -39,7 +39,7 @@ export default function Product() {
           <p>GeoNotes is powered by:</p>
           <ul style={{ fontSize: "15px", listStyleType: "none" }}>
             {providers.map((provider, index) => (
-              <Provider key={index} {...provider} />
+              <Provider key={`provider-${index}`} {...provider} />
             ))}
           </ul>
         </div>
