@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import DatePicker from "react-datepicker";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import toast from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { useUrlPosition } from "../hooks/useUrlPosition";
+import { useCities } from "../contexts/CitiesContext";
+import { useAuth } from "../contexts/AuthContext";
 import Button from "./Button";
 import BackButton from "./BackButton";
-
-import styles from "./Form.module.css";
-import { useUrlPosition } from "../hooks/useUrlPosition";
 import Message from "./Message";
 import Spinner from "./Spinner";
-import { useCities } from "../contexts/CitiesContext";
-import { useNavigate } from "react-router-dom";
+import styles from "./Form.module.css";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useAuth } from "../contexts/AuthContext";
-import toast from "react-hot-toast";
-
+// eslint-disable-next-line react-refresh/only-export-components
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
     .toUpperCase()

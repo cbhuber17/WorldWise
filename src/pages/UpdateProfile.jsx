@@ -3,8 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import toast from "react-hot-toast";
 import parse from "html-react-parser";
-import { sleep } from "../utils/utils";
 import { useAuth } from "../contexts/AuthContext";
+import { sleep } from "../utils/utils";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
 import AvatarFormRow from "../components/AvatarFormRow";
@@ -29,7 +29,7 @@ function checkField(field, errorMsg) {
   return true;
 }
 
-function validatePassword(password, oldPassword, passwordConfirm) {
+function validatePassword(password, passwordConfirm) {
   if (password !== passwordConfirm) {
     toast.error("Passwords to not match", { style: toastStyle });
     return false;
@@ -50,7 +50,6 @@ export default function UpdateProfile() {
   const navigate = useNavigate();
   const { attributes } = user;
 
-  // TODO: use AWS as auth provider?  Applies to elsewhere in the code lib.
   const { isAuthenticated } = useAuth();
 
   // Not authenticated, just put back to home page

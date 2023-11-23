@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
+import { useCities } from "../contexts/CitiesContext";
 import Button from "../components/Button";
 import PageNav from "../components/PageNav";
 import FormRow from "../components/FormRow";
 import Spinner from "../components/Spinner";
 import styles from "./Login.module.css";
-import { useCities } from "../contexts/CitiesContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");

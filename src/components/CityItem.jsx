@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useCities } from "../contexts/CitiesContext";
-import styles from "./CityItem.module.css";
 import { useAuth } from "../contexts/AuthContext";
+import styles from "./CityItem.module.css";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -19,7 +19,7 @@ function CityItem({ city, markersRef }) {
   function handleClick(e) {
     e.preventDefault();
 
-    // Disable when viewing read-only
+    // Disable deleting cities when viewing read-only
     if (!isReadOnly) deleteCity(id);
   }
 
