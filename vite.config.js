@@ -17,4 +17,7 @@ export default defineConfig({
       "./runtimeConfig": "./runtimeConfig.browser",
     },
   },
+  build: {
+    target: "esnext",
+  },
 });
