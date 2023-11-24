@@ -63,8 +63,8 @@ function AuthProvider({ children }) {
 
   async function logout() {
     try {
-      await Auth.signOut();
       dispatch({ type: "logout" });
+      await Auth.signOut();
     } catch (error) {
       toastError("Error signing out");
       console.log("Error signing out: ", error);

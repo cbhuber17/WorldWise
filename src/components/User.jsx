@@ -37,7 +37,7 @@ function User() {
     <div className={styles.user}>
       {/* TODO: avatar will always return a string.  Make sure that string points to a valid aws image (not 404).  If the image is deleted, the short circuit will not work below */}
       <img
-        src={avatar || "/assets/img/no-profile.png"}
+        src={avatar || "/WorldWise/assets/img/no-profile.png"}
         alt={attributes.name}
         title={attributes.name}
       />
