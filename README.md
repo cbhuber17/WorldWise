@@ -37,13 +37,11 @@ Contact me if you want to view a demo account!
 
 ## TODO:
 
-- Forgot password/account recovery: https://docs.amplify.aws/lib/auth/password_management/q/platform/js/#change-to-a-new-password-via-self-service
-- Center map on popup when clicking a CityItem, perhaps useRef for map and pass it to CityItem
 - MAIN.JSX add strict mode for production
-- Check responsiveness: 375, 550, 750, 1050
-- Add amplify demo account, add pockethost demo db
+- Forgot password/account recovery: https://docs.amplify.aws/lib/auth/password_management/q/platform/js/#change-to-a-new-password-via-self-service
+- Signing up causes console error: SignUp.jsx?t=1699897158672:98 POST https://cognito-idp.us-west-2.amazonaws.com/ 400 (Bad Request)
+- Center map on popup when clicking a CityItem, perhaps useRef for map and pass it to CityItem
 - "Use your position" with a popup active didn't move to position
 - SignUp post-confirm email, "Welcome to GeoNotes!". Will need email backend.
 - Confirm page send code email again
 - Address TODOs in code
-- Signing up causes console error: SignUp.jsx?t=1699897158672:98 POST https://cognito-idp.us-west-2.amazonaws.com/ 400 (Bad Request)
