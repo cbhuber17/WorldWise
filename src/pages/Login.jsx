@@ -34,7 +34,9 @@ export default function Login() {
         dispatchCities({ type: "db/load", payload: username });
 
         // Check if user is not demo account
-        if (username !== "demo") dispatchAuth({ type: "user/approved" });
+        if (username !== "demo") {
+          dispatchAuth({ type: "user/approved" });
+        }
 
         // Move to app
         navigate("/app", {
