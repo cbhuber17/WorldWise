@@ -11,7 +11,12 @@ function User() {
   const { user, logout, isReadOnly } = useAuth();
   const navigate = useNavigate();
 
-  const { attributes } = user;
+  let { attributes } = user;
+
+  // Demo account only
+  if (!attributes) {
+    attributes = user.challengeParam.userAttributes;
+  }
 
   useEffect(() => {
     async function getAvatar() {
@@ -20,7 +25,7 @@ function User() {
       });
       setAvatar(result);
     }
-    getAvatar();
+    if (attributes.picture !== "demo.jpg") getAvatar();
   }, [attributes.picture]);
 
   function handleClick() {
