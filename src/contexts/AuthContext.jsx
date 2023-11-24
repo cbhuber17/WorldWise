@@ -25,7 +25,7 @@ function reducer(state, action) {
     case "login":
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
-      return { ...state, user: null, isAuthenticated: false };
+      return { ...state, user: null, isAuthenticated: false, isReadOnly: true };
     case "user/approved":
       return { ...state, isReadOnly: false };
     default:
